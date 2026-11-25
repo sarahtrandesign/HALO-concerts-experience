@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>EXhOrizon dot · HALO immersive live viewing</title>
-<meta name="description" content="A fan-made 3D KSPO Dome for EXO PLANET #6 EXhOrizon dot. Enter with your name, wave your lightstick, listen and watch together with other EXO-Ls.">
+<title>HALO · immersive live viewing · EXhOrizon dot</title>
+<meta name="description" content="HALO is an immersive live-viewing platform for rotating concert programmes, including EXhOrizon dot at KSPO DOME, Seoul.">
 <meta name="theme-color" content="#071014">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -466,8 +466,8 @@ body.sheet-open #liveChat{display:none}
 <script>setTimeout(function(){var m=document.getElementById('loadMsg');if(m)m.textContent='Still loading… If this takes too long, check your connection and reload (needs a recent Chrome, Safari or Edge).';},15000);</script>
 <div id="stage3d"></div>
 <div id="hc">
-  <header id="hc-brand"><div class="k">HALO · Immersive live viewing · 2035</div><h1>EXhOrizon <span>dot</span> · live from KSPO DOME</h1><div class="m">A mini-Sphere for concerts, captured live in Seoul</div></header>
-  <div id="hc-top"><div class="hc-pill hc-live"><b>LIVE</b><span id="hc-song">EXhOrizon dot</span></div><button id="gyroBtn" class="hc-pill" type="button">Move phone</button></div>
+  <header id="hc-brand"><div class="k">HALO · Immersive live viewing · 2035</div><h1>HALO <span>· EXhOrizon dot</span></h1><div class="m">A mini-Sphere for concerts, captured live in Seoul</div></header>
+  <div id="hc-top"><div class="hc-pill hc-live"><b>LIVE</b><span id="hc-song">HALO · EXhOrizon dot</span></div><button id="gyroBtn" class="hc-pill" type="button">Move phone</button></div>
   <section id="sc" class="g" aria-label="Your seat">
     <div class="r1"><div id="sc-seat">Row M · Seat 24</div><div id="sc-price">$129</div></div>
     <div id="sc-tier">Orbit</div><div id="sc-note"></div><ul id="sc-feat"></ul>
@@ -5164,7 +5164,7 @@ function startLocalAudio(index = localTrack, force = false) {
   });
   updateCineMusicLabel();
 }
-function updateCineMusicLabel() { const t = AUDIO_TRACKS[localTrack]; if (t) { nowPlayingTitle = t.title; $('#hc-song').textContent = `EXhOrizon dot · ${t.title}`; } }
+function updateCineMusicLabel() { const t = AUDIO_TRACKS[localTrack]; if (t) { nowPlayingTitle = t.title; $('#hc-song').textContent = `HALO · ${t.title}`; } }
 function updateMuteButton() { const b = $('#muteBtn'); if (!b) return; b.textContent = localMuted ? 'Unmute' : 'Mute'; b.classList.toggle('on', !localMuted); b.setAttribute('aria-pressed', String(localMuted)); b.setAttribute('aria-label', localMuted ? 'Unmute soundtrack' : 'Mute soundtrack'); }
 function setLocalMuted(muted) { localMuted = !!muted; if (localAudio) localAudio.muted = localMuted; updateMuteButton(); }
 function armAndPlayLocal() {
@@ -7446,8 +7446,8 @@ function launchCinemaConfetti() {
   const count = cinemaConfetti.n, colors = ['#fff1c9', '#ff70b5', '#62dfff', '#b9a6ff', '#ffd45a'];
   for (let n = 0; n < Math.min(count, isTouch ? 150 : 360); n++) {
     const i = cinemaConfetti.next; cinemaConfetti.next = (i + 1) % count; const c = cinemaConfetti.data[i];
-    const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 12;
-    c.p.set(Math.sin(a) * rr, 12.5 + Math.random() * 4, VEN.F.z + Math.cos(a) * rr);
+    const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 11.8;
+    c.p.set(VEN.C.x + Math.sin(a) * rr, 12.5 + Math.random() * 4, VEN.C.z + Math.cos(a) * rr);
     c.v.set((Math.random() - .5) * .55, -(1.1 + Math.random() * 1.1), (Math.random() - .5) * .55);
     c.r.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); c.w.set(Math.random() * 3, Math.random() * 4, Math.random() * 3); c.delay = Math.random() * 2.2; c.col = colors[n % colors.length];
     cinemaConfetti.mesh.setColorAt(i, new THREE.Color(colors[n % colors.length]));
@@ -7457,11 +7457,20 @@ function launchCinemaConfetti() {
 }
 function updateCinemaConfetti(dt, t) {
   const { mesh, data, active } = cinemaConfetti;
+  const innerR = VEN.R - 1.15;
   for (let k = active.length - 1; k >= 0; k--) {
     const i = active[k], c = data[i]; if (c.delay > 0) { c.delay -= dt; continue; }
     c.p.addScaledVector(c.v, dt); c.p.x += Math.sin(t * 1.7 + c.ph) * dt * .28; c.p.z += Math.cos(t * 1.3 + c.ph) * dt * .22;
+    const dx = c.p.x - VEN.C.x, dz = c.p.z - VEN.C.z, rr = Math.hypot(dx, dz);
+    if (rr > innerR) {
+      const keep = innerR / rr; c.p.x = VEN.C.x + dx * keep; c.p.z = VEN.C.z + dz * keep; c.v.x *= -.28; c.v.z *= -.28;
+    }
+    const radial = Math.hypot(c.p.x - VEN.C.x, c.p.z - VEN.C.z);
+    const cap = Math.sqrt(Math.max(0, VEN.R * VEN.R - radial * radial));
+    const top = VEN.C.y + cap - .6, bottom = Math.max(.08, VEN.C.y - cap + .28);
     c.r.x += c.w.x * dt; c.r.y += c.w.y * dt; c.r.z += c.w.z * dt;
-    const gy = .08 + Math.max(0, Math.hypot(c.p.x, c.p.z - VEN.F.z) - 8) * .06;
+    if (c.p.y > top) { c.p.y = top; c.v.y = -Math.abs(c.v.y) * .15; }
+    const gy = bottom + Math.max(0, radial - 8) * .025;
     if (c.p.y <= gy) { c.p.y = gy; c.on = false; active[k] = active[active.length - 1]; active.pop(); }
     confDummy.position.copy(c.p); confDummy.rotation.copy(c.r); confDummy.scale.set(1, 1, 1); confDummy.updateMatrix(); mesh.setMatrixAt(i, confDummy.matrix);
   }
@@ -7542,33 +7551,58 @@ const bowlMat = new THREE.MeshStandardMaterial({ color: '#0b0d11', roughness: .9
   cineScene.add(new THREE.Mesh(mergeGeometries(parts), bowlMat));
   const ag = new THREE.BufferGeometry(); ag.setAttribute('position', new THREE.Float32BufferAttribute(aislePts, 3)); cineScene.add(new THREE.Points(ag, new THREE.PointsMaterial({ color: '#ffb35c', size: .09, sizeAttenuation: true, toneMapped: false })));
 }
-// Audience uses the same smooth skinned neutral figure as the main HALO game, scaled into relaxed seated poses.
-const people = SEATS.filter(s => s.filled), audienceChars = [];
-people.forEach((s, i) => {
-  const color = ['#f4f2ee', '#d9e7ee', '#e8d8b6', '#b9dfd8', '#d9c7e8'][i % 5];
-  const av = new Avatar('', color, false, null);
-  scene.remove(av.g); cineScene.add(av.g);
-  av.g.scale.set(.72, .72, .72); av.g.traverse(o => { if (o.isSprite) o.visible = false; });
-  av.pos.set(s.x, 0, s.z); av.target.copy(av.pos); av.rot = s.yaw; av.targetRot = s.yaw;
-  audienceChars.push({ av, seat: s, phase: hash2(i + 11, s.row + 3) * Math.PI * 2, rate: .55 + hash2(i + 5, 2) * .8, waveAmp: .45 + hash2(i + 9, 7) * .8, jumpEvery: 2.8 + hash2(i + 4, 19) * 5.5, jumpPhase: hash2(i + 2, 29) * 8, jumpHeight: .025 + hash2(i + 3, 31) * .13, sway: .012 + hash2(i + 8, 1) * .045, armSide: i % 2 ? 1 : -1, rest: hash2(i + 13, 37) > .84 });
-});
+// Cinema audience follows the original EXhOrizon game language: compact capsule bodies plus separate flat hex lightsticks.
+// The small silhouettes read cleanly at distance, while each seat still gets its own timing and hand position.
+const people = SEATS.filter(s => s.filled);
+const cinemaAudience = { body: null, sticks: null, data: [], palette: '' };
+{
+  const bodyMat = new THREE.MeshLambertMaterial({ color: '#10202a', vertexColors: true });
+  const stickMat = new THREE.MeshBasicMaterial({ color: '#ffffff', vertexColors: true, toneMapped: false, side: THREE.DoubleSide });
+  cinemaAudience.body = new THREE.InstancedMesh(new THREE.CapsuleGeometry(.2, .72, 2, 6), bodyMat, people.length);
+  cinemaAudience.sticks = new THREE.InstancedMesh(STICK.crowd, stickMat, people.length);
+  cinemaAudience.body.frustumCulled = false; cinemaAudience.sticks.frustumCulled = false;
+  const dummy = new THREE.Object3D(), bodyCol = new THREE.Color(), stickCol = new THREE.Color();
+  people.forEach((s, i) => {
+    const scale = .78 + hash2(i + 31, s.row + 5) * .32;
+    const rightX = Math.cos(s.yaw), rightZ = -Math.sin(s.yaw);
+    const frontX = -Math.sin(s.yaw), frontZ = -Math.cos(s.yaw);
+    const stageYaw = Math.atan2(VEN.F.x - s.x, VEN.F.z - s.z);
+    const a = { seat: s, phase: hash2(i + 11, s.row + 3) * Math.PI * 2, rate: .7 + hash2(i + 5, 2) * .72, wave: .28 + hash2(i + 9, 7) * .32, jumpEvery: 2.8 + hash2(i + 4, 19) * 5.5, jumpPhase: hash2(i + 2, 29) * 8, jumpHeight: .035 + hash2(i + 3, 31) * .14, sway: .018 + hash2(i + 8, 1) * .05, stickTilt: (hash2(i + 7, 41) - .5) * .34, scale, rightX, rightZ, frontX, frontZ, stageYaw };
+    cinemaAudience.data.push(a);
+    dummy.position.set(s.x, s.y + .56, s.z); dummy.rotation.set(0, s.yaw, 0); dummy.scale.set(scale, scale, scale); dummy.updateMatrix(); cinemaAudience.body.setMatrixAt(i, dummy.matrix);
+    bodyCol.setHSL(.53 + hash2(i + 17, 4) * .08, .22, .045 + hash2(i + 19, 6) * .045); cinemaAudience.body.setColorAt(i, bodyCol);
+    dummy.position.set(s.x + rightX * .22 + frontX * .14, s.y + 1.38, s.z + rightZ * .22 + frontZ * .14); dummy.rotation.set(0, stageYaw, a.stickTilt); dummy.scale.setScalar(1.05 + hash2(i + 23, 3) * .25); dummy.updateMatrix(); cinemaAudience.sticks.setMatrixAt(i, dummy.matrix);
+    stickCol.set('#ffffff'); cinemaAudience.sticks.setColorAt(i, stickCol);
+  });
+  cinemaAudience.body.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceMatrix.needsUpdate = true;
+  cineScene.add(cinemaAudience.body, cinemaAudience.sticks);
+}
 function updateSeatedAudience(dt, now, t) {
-  const pal = SHOW.cue.cols;
-  for (let i = 0; i < audienceChars.length; i++) {
-    const a = audienceChars[i], av = a.av, local = t * a.rate + a.phase;
-    av.update(dt, now, t);
-    const active = !a.rest || Math.sin(local * .21 + a.phase) > -.35;
-    const wave = active ? .5 + .5 * Math.sin(local * 1.15 + a.phase) : .12;
-    const jumpClock = (t + a.jumpPhase) % a.jumpEvery, jump = active && jumpClock < .72 ? Math.sin(jumpClock / .72 * Math.PI) * a.jumpHeight : 0;
-    av.g.position.set(a.seat.x, a.seat.y + jump, a.seat.z);
-    av.g.rotation.y = a.seat.yaw + Math.sin(local * .24) * a.sway;
-    av.B.thL.rotation.x = -.72; av.B.thR.rotation.x = -.72; av.B.shL.rotation.x = 1.12; av.B.shR.rotation.x = 1.12;
-    av.B.chest.rotation.z = Math.sin(local * .52 + a.phase) * a.sway;
-    const arm = a.armSide * (-.48 - wave * a.waveAmp);
-    const fore = -.72 + Math.sin(local * 1.8 + a.phase) * .22;
-    if (a.armSide > 0) { av.B.uaR.rotation.z = arm; av.B.faR.rotation.z = fore; } else { av.B.uaL.rotation.z = arm; av.B.faL.rotation.z = fore; }
-    av.glowMat?.color.copy(pal[(i + Math.floor(t / 8)) % pal.length]);
+  const pal = SHOW.cue.cols, palette = pal.join('|');
+  if (cinemaAudience.palette !== palette) {
+    cinemaAudience.palette = palette;
+    cinemaAudience.data.forEach((a, i) => cinemaAudience.sticks.setColorAt(i, new THREE.Color(pal[(i + Math.floor(t / 8)) % pal.length])));
+    cinemaAudience.sticks.instanceColor.needsUpdate = true;
   }
+  const dummy = new THREE.Object3D();
+  cinemaAudience.data.forEach((a, i) => {
+    const local = t * a.rate + a.phase;
+    const active = Math.sin(local * .21 + a.phase) > -.55;
+    const wave = active ? .5 + .5 * Math.sin(local * 1.15 + a.phase) : .12;
+    const jumpClock = (t + a.jumpPhase) % a.jumpEvery;
+    const jump = active && jumpClock < .72 ? Math.sin(jumpClock / .72 * Math.PI) * a.jumpHeight : 0;
+    const bodySway = Math.sin(local * .24 + a.phase) * a.sway;
+    dummy.position.set(a.seat.x, a.seat.y + .56 + jump, a.seat.z);
+    dummy.rotation.set(0, a.seat.yaw, bodySway);
+    dummy.scale.set(a.scale, a.scale * (1 + jump * 1.5), a.scale);
+    dummy.updateMatrix(); cinemaAudience.body.setMatrixAt(i, dummy.matrix);
+    const stickWave = Math.sin(local * 1.55 + a.phase) * a.wave;
+    dummy.position.set(a.seat.x + a.rightX * (.22 + stickWave * .05) + a.frontX * .14, a.seat.y + 1.38 + jump + Math.abs(stickWave) * .05, a.seat.z + a.rightZ * (.22 + stickWave * .05) + a.frontZ * .14);
+    dummy.rotation.set(stickWave * .22, a.stageYaw, a.stickTilt + stickWave);
+    dummy.scale.setScalar(1.05 + a.scale * .18);
+    dummy.updateMatrix(); cinemaAudience.sticks.setMatrixAt(i, dummy.matrix);
+  });
+  cinemaAudience.body.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceMatrix.needsUpdate = true;
 }
 const cineStickU = { uBeat: { value: 0 }, uCol: { value: new THREE.Color() }, uCol2: { value: new THREE.Color() }, uPx: { value: 1 }, uPat: { value: 0 } };
 {
@@ -7673,7 +7707,8 @@ function updateCineCamera(dt) {
     if (pulse) { _ce.x += Math.sin(SHOW.beat * 1.7) * pulse; _ce.y -= pulse * .45; }
     const nearFade = cv.dolly === 0 ? 1 : 0.12; seatMesh.material.transparent = nearFade < 1; seatMesh.material.opacity = nearFade;
     const bodies = cineScene.getObjectByName('audience-bodies'); if (bodies?.material) { bodies.material.transparent = nearFade < 1; bodies.material.opacity = nearFade; }
-    const audience = cineScene.getObjectByName('seated-audience'); if (audience) audience.visible = true;
+    // The cinema audience is instanced in cineScene and remains visible in every seat/cutaway camera.
+    cinemaAudience.body.visible = true; cinemaAudience.sticks.visible = true;
     const ay = cv.seat.yaw + yaw, cp = Math.cos(pitch);
     _ct.set(_ce.x - Math.sin(ay) * cp * 10, _ce.y + Math.sin(pitch) * 10, _ce.z - Math.cos(ay) * cp * 10);
     cineCam.position.copy(_ce); cineCam.up.set(0, 1, 0); cineCam.lookAt(_ct);
@@ -7773,7 +7808,7 @@ $('#vibBtn').addEventListener('click', e => { vibOn = e.currentTarget.classList.
 $('#gyroBtn').hidden = !isTouch; $('#gyroBtn').addEventListener('click', e => { if (e.currentTarget.classList.toggle('on')) startGyro(); else cv.gyro = null; });
 pickHaloSeat(SEATS[store.get('halo-seat2') ?? -1] || SEATS.filter(q => q.lv === '200' && q.tier === 'prime').sort((a, b) => (Math.abs(a.yaw) * 8 + Math.abs(a.row - 6)) - (Math.abs(b.yaw) * 8 + Math.abs(b.row - 6)))[0] || SEATS[0], true);
 setCineView('seat');
-function updateCineBar() { const song = 'EXhOrizon dot · ' + SHOW.cue.name; if ($('#hc-song').textContent !== song) $('#hc-song').textContent = song; }
+function updateCineBar() { const song = 'HALO · ' + SHOW.cue.name; if ($('#hc-song').textContent !== song) $('#hc-song').textContent = song; }
 
 /* ---------------- loop ---------------- */
 const clock = new THREE.Clock();
@@ -7887,9 +7922,9 @@ function renderRide() {
   root.classList.toggle('seatmap-open', ride.step === 2);
   const tier = rideTier(), seat = ride.selected || cv.seat, elapsed = ride.started ? rideShowElapsed() : (ride.watched || 0), plan = SHOW_PLAN[SHOW.cueIdx] || SHOW_PLAN[0];
   const dots = Array.from({ length: 8 }, (_, i) => `<i class="${i + 1 === ride.step ? 'on' : ''}"></i>`).join('');
-  const chrome = `<div class="brand"><div class="kicker">HALO · IMMERSIVE LIVE VIEWING · 2035</div><div class="title">EXhOrizon <em>dot</em></div><div class="meta">Live from KSPO DOME, Seoul · tonight, 20:00 KST</div></div><div class="status"><i class="dot"></i> relay online · +0.8 s</div><div class="stepper">${dots}</div>`;
+  const chrome = `<div class="brand"><div class="kicker">HALO</div><div class="title">Immersive live viewing · 2035</div><div class="meta"><span class="show-name">EXhOrizon dot</span> · live from KSPO DOME, Seoul · tonight, 20:00 KST</div></div><div class="status"><i class="dot"></i> relay online · +0.8 s</div><div class="stepper">${dots}</div>`;
   let body = '';
-  if (ride.step === 1) body = rideSheet(`<div class="eyebrow">A seat in the signal</div><h2>EXhOrizon <em>dot</em></h2><p class="lede">A live relay from the encore at KSPO DOME. The stage picture arrives on the dome; the room keeps the ritual.</p><div class="hero-stat"><div class="stat"><strong>2035</strong><small>HALO · Seoul</small></div><div class="stat"><strong>07:00</strong><small>mock concert, one continuous take</small></div><div class="stat"><strong>${SEATS.length}</strong><small>seated places</small></div><div class="stat"><strong>$10</strong><small>today's cinema reference</small></div></div><div class="actions"><button class="primary" data-ride="seat">Choose a seat</button></div><p class="fine">No camera, microphone or biometric API. Sound starts after your tap.</p>`);
+  if (ride.step === 1) body = rideSheet(`<div class="eyebrow">HALO · immersive live viewing</div><h2>HALO</h2><p class="lede"><span class="show-name">EXhOrizon dot</span> is tonight's live programme: a live relay from the encore at KSPO DOME. The stage picture arrives on the dome; the room keeps the ritual.</p><div class="hero-stat"><div class="stat"><strong>2035</strong><small>HALO · Seoul</small></div><div class="stat"><strong>07:00</strong><small>mock concert, one continuous take</small></div><div class="stat"><strong>${SEATS.length}</strong><small>seated places</small></div><div class="stat"><strong>$10</strong><small>today's cinema reference</small></div></div><div class="actions"><button class="primary" data-ride="seat">Choose a seat</button></div><p class="fine">No camera, microphone or biometric API. Sound starts after your tap.</p>`);
   if (ride.step === 2) body = rideSheet(`<div class="sheet-seatmap"><div class="eyebrow">Step 2 · choose a seat</div><h2>Find your angle</h2><p>Pick any free seat in the 18-row rake. The preview lifts behind your row before settling into the seat.</p><div class="seat-filter" role="group" aria-label="Seat tiers"><button class="secondary on" data-tier="all">All seats</button>${RIDE_TIERS.map(t => `<button class="secondary" data-tier="${t.key}">${t.label}</button>`).join('')}</div><div id="ride-seat-map" class="ride-seat-map" aria-label="Full seat map"></div><div id="ride-seat-tip" class="fine">Faded seats are taken.</div><div class="preview-strip"><div class="mini-card"><strong>${seat?.label || 'Choose a free seat'}</strong><span>${tier.note}</span></div><div class="mini-card"><strong>${tier.label}</strong><span>${tier.include}</span></div></div><div class="actions"><button class="secondary" data-ride="back">Back</button><button class="secondary" data-ride="walk">Look around the cinema</button><button class="primary" data-ride="stick">Continue</button></div></div>`);
   if (ride.step === 3) body = rideSheet(`<div class="eyebrow">Step 3 · pair a lightstick</div><h2>Bring the glow</h2><p>Your stick follows the room cue. Pair your own for free, or borrow one at the door.</p><div class="option-grid"><button class="choice ${ride.paired ? 'on' : ''}" data-pair="own"><strong>Own stick · free</strong><span>Pair once, keep your colour.</span></button><button class="choice" data-pair="rent"><strong>HALO rental · $4</strong><span>Returned after the show.</span></button></div><div class="color-row">${RIDE_COLORS.map(c => `<button class="color-chip ${ride.color === c ? 'on' : ''}" style="--c:${c}" data-color="${c}" aria-label="Pair ${c}"></button>`).join('')}</div><div class="mini-card"><strong>${ride.paired ? 'Seat ' + (seat?.num || '214') + ' · stick paired' : 'Choose a colour to pair'}</strong><span>It will appear in your hand when the room opens.</span></div><div class="actions"><button class="secondary" data-ride="seat">Back</button><button class="primary" data-ride="consent" ${ride.paired ? '' : 'disabled'}>Continue</button></div>`);
   if (ride.step === 4) body = rideSheet(`<div class="eyebrow">Step 4 · consent and entry</div><h2>Set the boundary</h2><p>Granular controls for the relay. You can enter without a face scan.</p><div class="switch-list"><div class="switch">Lightstick activity<button class="toggle ${ride.consent.light ? 'on' : ''}" data-toggle="light"></button></div><div class="switch">Reactions during the show<button class="toggle ${ride.consent.reactions ? 'on' : ''}" data-toggle="reactions"></button></div><div class="switch">Pair entry to this seat<button class="toggle ${ride.consent.entry ? 'on' : ''}" data-toggle="entry"></button></div><div class="switch">Keep the receipt for 30 days<button class="toggle ${ride.consent.retain ? 'on' : ''}" data-toggle="retain"></button></div></div><div class="option-grid"><button class="choice ${ride.entry === 'express' ? 'on' : ''}" data-entry="express"><strong>Express</strong><span>Simulated face scan + pairing. No biometric API.</span></button><button class="choice ${ride.entry === 'standard' ? 'on' : ''}" data-entry="standard"><strong>Standard</strong><span>Printed QR, slower entry, no scan.</span></button></div><p class="fine">We keep seat, entry path, lightstick time and reactions for this prototype. No sale, no analytics, no account.</p><div class="actions"><button class="secondary" data-ride="stick">Back</button><button class="primary" data-ride="show">Enter HALO</button></div>`);
@@ -7952,7 +7987,7 @@ if (new URLSearchParams(location.search).has('nogl')) {
   function noglRender() {
     const dots = labels.map((_, i) => `<i class="${i + 1 === step ? 'on' : ''}"></i>`).join('');
     let body = '';
-    if (step === 1) body = `<div class="sheet center"><div class="eyebrow">A seat in the signal</div><h2>EXhOrizon <em>dot</em></h2><p class="lede">A live relay from the encore at KSPO DOME. The stage picture arrives on the dome; the room keeps the ritual.</p><div class="hero-stat"><div class="stat"><strong>2035</strong><small>HALO · Seoul</small></div><div class="stat"><strong>07:00</strong><small>mock concert</small></div><div class="stat"><strong>≤ 1,000</strong><small>local cinema</small></div></div><div class="actions"><button class="primary" data-nogl="seat">Choose a seat</button></div></div>`;
+    if (step === 1) body = `<div class="sheet center"><div class="eyebrow">HALO · immersive live viewing</div><h2>HALO</h2><p class="lede"><span class="show-name">EXhOrizon dot</span> is tonight's live programme: a live relay from the encore at KSPO DOME. The stage picture arrives on the dome; the room keeps the ritual.</p><div class="hero-stat"><div class="stat"><strong>2035</strong><small>HALO · Seoul</small></div><div class="stat"><strong>07:00</strong><small>mock concert</small></div><div class="stat"><strong>≤ 1,000</strong><small>local cinema</small></div></div><div class="actions"><button class="primary" data-nogl="seat">Choose a seat</button></div></div>`;
     if (step === 2) body = `<div class="sheet"><div class="eyebrow">Step 2 · choose a seat</div><h2>Find your angle</h2><p>One steep rake, 18 rows, no balcony. Every seat reaches the whole screen.</p><div class="seat-map">${Object.entries(tierCopy).map(([n, price], i) => `<button class="seat-option ${i === 0 ? 'on' : ''}" style="--seat:${['#e8c28c','#75d0ff','#b9a6ff'][i]}">${n}<small>${price}</small></button>`).join('')}</div><div class="preview-strip"><div class="mini-card"><strong>Row J · Seat 24</strong><span>Screen wraps from the stage to the ceiling.</span></div><div class="mini-card"><strong>${SEATS.length} seats</strong><span>Every place is seated. Stand at your own seat.</span></div></div><div class="actions"><button class="secondary" data-nogl="back">Back</button><button class="primary" data-nogl="stick">Continue</button></div></div>`;
     if (step === 3) body = `<div class="sheet"><div class="eyebrow">Step 3 · pair a lightstick</div><h2>Bring the glow</h2><p>Your stick follows the room cue. Pair your own for free, or borrow one at the door.</p><div class="option-grid"><button class="choice on"><strong>Own stick · free</strong><span>Pair once, keep your colour.</span></button><button class="choice"><strong>HALO rental · $4</strong><span>Returned after the show.</span></button></div><div class="color-row"><button class="color-chip on" style="--c:#fff1d6"></button><button class="color-chip" style="--c:#4fd8ff"></button><button class="color-chip" style="--c:#a66bff"></button><button class="color-chip" style="--c:#ff4fb0"></button></div><div class="actions"><button class="secondary" data-nogl="seat">Back</button><button class="primary" data-nogl="consent">Continue</button></div></div>`;
     if (step === 4) body = `<div class="sheet"><div class="eyebrow">Step 4 · consent and entry</div><h2>Set the boundary</h2><p>Granular controls for the relay. You can enter without a face scan.</p><div class="switch-list"><div class="switch">Lightstick activity<button class="toggle on"></button></div><div class="switch">Reactions during the show<button class="toggle on"></button></div><div class="switch">Pair entry to this seat<button class="toggle on"></button></div><div class="switch">Keep the receipt for 30 days<button class="toggle"></button></div></div><div class="option-grid"><button class="choice on"><strong>Express</strong><span>Simulated pairing. No biometric API.</span></button><button class="choice"><strong>Standard</strong><span>Printed QR, no scan.</span></button></div><div class="actions"><button class="secondary" data-nogl="stick">Back</button><button class="primary" data-nogl="show">Enter HALO</button></div></div>`;
@@ -7960,7 +7995,7 @@ if (new URLSearchParams(location.search).has('nogl')) {
     if (step === 7) body = `<div class="sheet"><div class="eyebrow">Step 7 · your receipt</div><h2>After the encore</h2><p>The room is dimming. Here is what HALO recorded for this visit.</p><div class="receipt"><div class="receipt-line"><span>Seat</span><span>Row J · Seat 24</span></div><div class="receipt-line"><span>Middle ticket</span><span>$18</span></div><div class="receipt-line"><span>Capacity</span><span>900 seated</span></div><div class="receipt-line"><span>Minutes watched</span><span>7 / 7</span></div><div class="receipt-line"><span>Lightstick time</span><span>06:42</span></div></div><div class="actions"><button class="secondary" data-nogl="end">Decline</button><button class="primary" data-nogl="end">Keep receipt</button></div></div>`;
     if (step === 8) body = `<div class="sheet center"><div class="eyebrow">HALO · thank you</div><h2>One picture. One night.</h2><p>Your relay stays on this device unless you chose to keep the receipt.</p><div class="actions"><button class="primary" data-nogl="again">Watch again</button></div></div>`;
     ride.hidden = false;
-    ride.innerHTML = `<div class="brand"><div class="kicker">HALO · IMMERSIVE LIVE VIEWING · 2035</div><div class="title">EXhOrizon <em>dot</em></div><div class="meta">Live from KSPO DOME, Seoul · tonight, 20:00 KST</div></div><div class="status"><i class="dot"></i> relay online · +0.8 s</div><div class="stepper">${dots}</div>${body}`;
+    ride.innerHTML = `<div class="brand"><div class="kicker">HALO</div><div class="title">Immersive live viewing · 2035</div><div class="meta"><span class="show-name">EXhOrizon dot</span> · live from KSPO DOME, Seoul · tonight, 20:00 KST</div></div><div class="status"><i class="dot"></i> relay online · +0.8 s</div><div class="stepper">${dots}</div>${body}`;
   }
   ride.addEventListener('click', e => { const b = e.target.closest('[data-nogl]'); if (!b) return; const a = b.dataset.nogl; if (a === 'seat') step = 2; else if (a === 'stick') step = 3; else if (a === 'consent') step = 4; else if (a === 'show') step = 6; else if (a === 'end') step = 8; else if (a === 'again') step = 1; else if (a === 'back') step = Math.max(1, step - 1); noglRender(); });
   document.getElementById('loading')?.remove();
