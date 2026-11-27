@@ -171,7 +171,7 @@ body.views-open #viewBtn .chev{transform:rotate(180deg)}
 #hint{position:fixed;left:50%;bottom:calc(16px + var(--safe-b));transform:translateX(-50%);z-index:4;max-width:min(560px,calc(100vw - 32px));text-align:center;font-size:12.5px;color:var(--muted);border-radius:999px;padding:7px 15px;pointer-events:none;transition:opacity .5s}
 #hint.hide{opacity:0}
 #hint b{color:var(--text);font-weight:600}
-#actions{position:fixed;right:calc(var(--gut) + var(--safe-r));bottom:calc(16px + var(--safe-b));display:none;flex-direction:column;gap:8px;z-index:6}
+#actions{position:fixed;right:calc(var(--gut) + var(--safe-r));bottom:calc(16px + var(--safe-b));display:none;flex-direction:column;gap:8px;z-index:90}
 #actions button{width:80px;height:48px;border-radius:14px;font-weight:600;font-size:13.5px;user-select:none;-webkit-user-select:none}
 #actions button.primary{background:linear-gradient(90deg,#e8c28c,#f3e2c4);color:var(--accent-ink);border:0}
 #actions button:active{transform:scale(.96)}
@@ -193,7 +193,7 @@ body.views-open #viewBtn .chev{transform:rotate(180deg)}
 .dcard.on{border-color:var(--accent);background:rgba(232,194,140,.1)}
 .dcard.on b{color:var(--accent)}
 body.joined #actions{display:flex}
-#joy{position:fixed;left:calc(22px + var(--safe-l));bottom:calc(22px + var(--safe-b));width:124px;height:124px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line-strong);display:none;z-index:6;touch-action:none;user-select:none;-webkit-user-select:none}
+#joy{position:fixed;left:calc(22px + var(--safe-l));bottom:calc(22px + var(--safe-b));width:124px;height:124px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line-strong);display:none;z-index:90;touch-action:none;user-select:none;-webkit-user-select:none}
 #knob{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#bfe3e0 60%,#7fb9b5);box-shadow:0 0 18px rgba(160,230,225,.45)}
 body.joined.touch #joy{display:block}
 body.joined.touch #mini{display:none}
@@ -286,6 +286,10 @@ body.chat-open #yt{right:calc(var(--gut) + 338px)}
 
 #toast{position:fixed;left:50%;top:calc(76px + var(--safe-t));transform:translate(-50%,-10px);opacity:0;z-index:30;background:var(--panel-solid);border:1px solid var(--line-strong);border-radius:16px;padding:9px 16px;font-size:13px;transition:opacity .25s,transform .25s;pointer-events:none;width:max-content;max-width:min(460px,calc(100vw - 32px));text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
+body.touch #walkHint{top:40vh}
+#walkHint{position:fixed;left:50%;top:24vh;transform:translate(-50%,-10px);opacity:0;z-index:70;pointer-events:none;background:var(--panel-solid);border:1px solid var(--line-strong);border-radius:16px;padding:11px 18px;font-size:14px;line-height:1.6;text-align:center;max-width:min(560px,calc(100vw - 28px));box-shadow:0 14px 50px #0008;transition:opacity .3s,transform .3s}
+#walkHint.show{opacity:1;transform:translate(-50%,0)}
+#walkHint kbd{display:inline-block;min-width:25px;margin:0 2px;padding:1px 6px;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;font:600 12px/1.55 system-ui,sans-serif;color:var(--accent)}
 #loading{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--muted);font-size:13px;flex-direction:column;gap:12px;padding:24px;text-align:center}
 #loading .ring{width:34px;height:34px;border-radius:50%;border:2px solid var(--line-strong);border-top-color:var(--accent);animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -379,12 +383,20 @@ body.sheet-open #liveChat{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- HALO Dome live viewing (this build shows the cinema; the arena is only filmed) ---------- */
-#brand,#topright,#dock,#sheet,#mini,#viewsWrap,#hint,#liveBar,#liveChat,#dancePick,#actions,#joy,#chat,#yt,#invite,#welcome{display:none!important}
+#brand,#topright,#dock,#sheet,#mini,#viewsWrap,#hint,#liveBar,#liveChat,#dancePick,#chat,#yt,#invite,#welcome{display:none!important}
 #hc{position:fixed;inset:0;pointer-events:none;z-index:10;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#f3f0ea}
 #hc .g{background:rgba(12,13,18,.62);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:1px solid rgba(255,255,255,.1);border-radius:16px}
 #hc-brand{position:absolute;left:22px;top:18px}
 #hc-brand .k{font:600 12px/1 Unbounded,sans-serif;letter-spacing:.22em;color:#e9c37b;text-transform:uppercase}#hc-brand h1{margin:8px 0 0;font:400 18px/1 'Instrument Serif',serif;letter-spacing:.05em;text-shadow:0 2px 18px rgba(0,0,0,.7)}#hc-brand h1 span{font-style:italic;color:#f3f0ea}#hc-brand .m{margin-top:6px;font-size:12px;color:#bdb8ae}
 #hc-top{position:absolute;right:18px;top:18px;display:flex;gap:8px;pointer-events:auto}
+#cornerControls{position:fixed;right:18px;top:70px;z-index:90;display:flex;align-items:center;gap:7px;pointer-events:auto}
+#cornerControls #muteBtn{position:static;z-index:auto}
+#qualityHud{display:flex;align-items:center;gap:3px;height:38px;padding:3px 5px 3px 11px;border-radius:999px;font:600 10px Unbounded,sans-serif;color:#bdb8ae;border:1px solid rgba(255,255,255,.16);background:rgba(12,13,18,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#qualityHud span{margin-right:3px;letter-spacing:.02em}
+#qualityHud button{height:30px;padding:0 9px;border:1px solid transparent;border-radius:999px;background:transparent;color:#bdb8ae;font:600 9px Unbounded,sans-serif;cursor:pointer}
+#qualityHud button:hover{background:rgba(255,255,255,.1);color:#f3f0ea}
+#qualityHud button.on{background:#e9c37b;color:#17130b;border-color:#fff2cf;box-shadow:0 0 0 2px rgba(233,195,123,.25)}
+#qualityHud button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 #muteBtn{position:fixed;right:18px;top:70px;z-index:90;min-width:108px;height:38px;padding:0 14px;border-radius:999px;font:600 11px Unbounded,sans-serif;color:#f3f0ea;cursor:pointer;border:1px solid rgba(255,255,255,.16);background:rgba(12,13,18,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:auto}
 #muteBtn.on{border-color:#e9c37b;color:#e9c37b;background:rgba(38,29,16,.86)}
 #muteBtn[hidden]{display:none}
@@ -406,10 +418,13 @@ body.sheet-open #liveChat{display:none}
 #sc-pres{display:block;height:100%;background:linear-gradient(90deg,#9fb7ff,#e9c37b);border-radius:9px}
 #sc-dist{font-size:11px;color:#8d887f;margin-top:8px}
 #sc .btns{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
-#cv{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:5px;pointer-events:auto;border-radius:999px!important}
+#cv{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:5px;pointer-events:auto;border-radius:999px!important;max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+#cv::-webkit-scrollbar{display:none}
 #cv button{height:38px;padding:0 16px;border-radius:999px;border:0;background:transparent;color:#d8d3c9;font:600 12px Unbounded,sans-serif;cursor:pointer}
 #cv button.on{background:#f3f0ea;color:#101014}
 #hc-hint{position:absolute;left:50%;bottom:72px;transform:translateX(-50%);font-size:12px;color:#bdb8ae;text-shadow:0 1px 8px #000}
+body.cinema-walk #actions{display:flex}body.cinema-walk #danceBtn,body.cinema-walk #waveBtn{display:none}
+body.cinema-walk.touch #joy{display:block}
 #picker{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(3,4,8,.55);pointer-events:auto}
 #picker[hidden]{display:none}
 #picker .card{width:min(1120px,calc(100vw - 32px));height:min(92dvh,860px);max-height:calc(100dvh - 24px);overflow:hidden;padding:clamp(16px,2vw,26px);display:flex;flex-direction:column}
@@ -426,8 +441,8 @@ body.sheet-open #liveChat{display:none}
 .lg{display:flex;align-items:center;gap:7px}.lg i{width:10px;height:10px;border-radius:50%}.lg span{color:#e9c37b}.lg em{color:#8d887f;font-style:normal}
 #mapTip{font-size:12px;color:#bdb8ae;margin-top:8px;min-height:16px}
 .fine{font-size:11px;color:#6f6b64;margin-top:10px;line-height:1.5}
-@media (max-width:760px){#hc-brand h1{font-size:30px}#hc-brand .m{display:none}#sc{left:10px;right:10px;width:auto;bottom:70px;padding:12px 14px}#sc-note,#sc ul{display:none}#cv{bottom:12px}#hc-hint{display:none}#hc-song{display:none}#hc-top{right:10px;top:12px}#muteBtn{right:10px;top:60px;min-width:92px;height:34px;padding:0 10px;font-size:9px}}
-@media (max-height:520px) and (orientation:landscape){#muteBtn{right:10px;top:58px}}
+@media (max-width:760px){#hc-brand h1{font-size:30px}#hc-brand .m{display:none}#sc{left:10px;right:10px;width:auto;bottom:70px;padding:12px 14px}#sc-note,#sc ul{display:none}#cv{bottom:12px;max-width:calc(100vw - 20px)}#hc-hint{display:none}#hc-song{display:none}#hc-top{right:10px;top:12px}#cornerControls{left:10px;right:10px;top:calc(108px + var(--safe-t));justify-content:flex-end;gap:4px}#qualityHud{height:34px;padding-left:8px}#qualityHud span{font-size:8px;margin-right:1px}#qualityHud button{height:27px;padding:0 7px;font-size:8px}#muteBtn{right:10px;top:60px;min-width:92px;height:34px;padding:0 10px;font-size:9px}body.cinema-walk #actions{right:10px;bottom:calc(70px + var(--safe-b));transform:scale(.82);transform-origin:bottom right}body.cinema-walk #joy{left:10px;bottom:calc(70px + var(--safe-b));transform:scale(.82);transform-origin:bottom left}}
+@media (max-height:520px) and (orientation:landscape){#cornerControls{right:10px;top:58px}#muteBtn{right:10px;top:58px}}
 </style>
 <script type="importmap">
 {"imports":{
@@ -462,7 +477,14 @@ body.sheet-open #liveChat{display:none}
 </svg>
 <div id="ride" hidden></div>
 <div id="loading"><div class="ring"></div><div id="loadMsg">Opening the doors…</div></div>
-<button id="muteBtn" type="button" aria-pressed="false" aria-label="Mute soundtrack">Mute</button>
+<div id="cornerControls" aria-label="Experience controls">
+  <div id="qualityHud" role="group" aria-label="Graphics quality">
+    <span>Graphics</span>
+    <button data-q="high" type="button" aria-label="Use high graphics">High</button>
+    <button data-q="lite" type="button" aria-label="Use low graphics">Low</button>
+  </div>
+  <button id="muteBtn" type="button" aria-pressed="false" aria-label="Mute soundtrack">Mute</button>
+</div>
 <script>setTimeout(function(){var m=document.getElementById('loadMsg');if(m)m.textContent='Still loading… If this takes too long, check your connection and reload (needs a recent Chrome, Safari or Edge).';},15000);</script>
 <div id="stage3d"></div>
 <div id="hc">
@@ -476,7 +498,7 @@ body.sheet-open #liveChat{display:none}
     <div class="btns"><button id="seatsBtn" class="hc-pill" type="button">Change seat</button><button id="vibBtn" class="hc-pill" type="button" hidden>Feel the bass</button></div>
   </section>
   <div id="hc-hint"></div>
-  <nav id="cv" class="g" aria-label="Views"><button data-v="seat" type="button">My seat</button><button data-v="walk" type="button">Look around</button><button data-v="cut" type="button">Cutaway</button><button id="techBtn" type="button">Show the tech</button></nav>
+  <nav id="cv" class="g" aria-label="Views"><button data-v="seat" type="button">My seat</button><button data-v="walk" type="button">Walk around</button><button data-v="cut" type="button">Cutaway</button><span id="cineViewModes" hidden aria-label="Character view"><button data-person="third" type="button">Third person</button><button data-person="first" type="button">First person</button></span><button id="techBtn" type="button">Show the tech</button></nav>
   <div id="picker" hidden><div class="card g">
     <div class="hd"><div><h2>Choose your seat</h2><div class="sub">One screen wraps the whole room, floor to ceiling. How much of it reaches you depends on where you sit.</div></div>
       <div style="display:flex;gap:6px"><button id="bestBtn" class="hc-pill" type="button">Best seat</button><button id="pickClose" class="hc-pill" type="button">Close</button></div></div>
@@ -4570,14 +4592,24 @@ function pick(x, y) {
 /* ---------------- self + input ---------------- */
 let myName = '', channel = 1, dayId = defaultDay();
 const keys = new Set(); const joyV = { x: 0, y: 0 };
+/* Keys are read by PHYSICAL position (e.code) as well as by letter (e.key), so WASD works on any keyboard layout or input method; both end up in `keys` under the Latin letter.
+   keyPend collects the keys pressed since the walker last looked: a tap that is over before the next frame still counts for that frame, so quick taps step even on a slow machine. */
+const CODE_KEY = { KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', ArrowUp: 'arrowup', ArrowDown: 'arrowdown', ArrowLeft: 'arrowleft', ArrowRight: 'arrowright', ShiftLeft: 'shift', ShiftRight: 'shift', Space: ' ' };
+const keyPend = new Set();
+const keyHeld = k => keys.has(k) || keyPend.has(k);
 addEventListener('keydown', e => {
-  if (e.target?.matches?.('input,select,textarea')) return;
-  const k = e.key.toLowerCase(); keys.add(k);
-  if (k === ' ' && me) { e.preventDefault(); doJump(); }
+  if (e.target?.matches?.('input,select,textarea,[contenteditable="true"]')) return;
+  const k = (e.key || '').toLowerCase(), a = CODE_KEY[e.code]; keys.add(k); if (a) keys.add(a);
+  if (cv.mode === 'walk') { keyPend.add(k); if (a) keyPend.add(a); }
+  const g = a ?? k;
+  if (cv.mode === 'walk' && (g === ' ' || g.startsWith('arrow'))) e.preventDefault(); // while walking, arrows and space never scroll the page or press a focused button
+  if (g === ' ' && (me || cv.mode === 'walk')) { e.preventDefault(); doJump(); }
   if (k === 'enter' && me) openChat(true);
+  if (k === 'escape' && cv.mode === 'walk' && ride.walking) rideLeaveWalk();
 });
-addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
+addEventListener('keyup', e => { keys.delete((e.key || '').toLowerCase()); const a = CODE_KEY[e.code]; if (a) keys.delete(a); });
 addEventListener('blur', () => keys.clear());
+document.addEventListener('visibilitychange', () => keys.clear());
 {
   const joy = $('#joy'), knob = $('#knob'); let id = null;
   const set = e => { const r = joy.getBoundingClientRect(); let x = (e.clientX - r.left - r.width / 2) / (r.width / 2), y = (e.clientY - r.top - r.height / 2) / (r.height / 2); const l = Math.hypot(x, y); if (l > 1) { x /= l; y /= l; } joyV.x = x; joyV.y = y; knob.style.transform = `translate(${x * 36}px,${y * 36}px)`; };
@@ -4836,9 +4868,9 @@ refreshOnline();
 $('#online').addEventListener('click', () => { if (net.status === 'offline' && me) { toast('Reconnecting…'); connect(); } else openSheet('room'); });
 
 /* ---------------- actions ---------------- */
-function doJump() { if (!me) return; me.jumpT = performance.now(); me.lastJt = Date.now() % 1e9; }
+function doJump() { if (cv.mode === 'walk') { cinemaJump(); return; } if (!me) return; me.jumpT = performance.now(); me.lastJt = Date.now() % 1e9; }
 function doWave() { if (!me) return; me.waveT = performance.now(); me.lastWt = Date.now() % 1e9; }
-$('#jumpBtn').onclick = doJump; $('#waveBtn').onclick = doWave;
+$('#jumpBtn').onclick = e => { doJump(); if (e.detail > 0) e.currentTarget.blur(); }; $('#waveBtn').onclick = doWave; // a mouse / touch click must not leave focus on the button (Space would then press it a second time)
 let pickedDance = 'snow';
 function updateDanceUI() {
   const on = !!(me && me.dance);
@@ -5686,7 +5718,7 @@ function applyQuality(q, byUser) {
   if (byUser) { store.set('exo-q2', q); perf.userPicked = true; if (q === 'high') store.set('exo-q-auto', ''); }
   renderer.setPixelRatio(pixelRatio()); renderer.setSize(innerWidth, innerHeight);
   if (composer) { composer.setPixelRatio(pixelRatio()); composer.setSize(innerWidth, innerHeight); }
-  document.querySelectorAll('#quality button').forEach(b => b.classList.toggle('on', b.dataset.q === q));
+  document.querySelectorAll('#quality button, #qualityHud button').forEach(b => b.classList.toggle('on', b.dataset.q === q));
   glowify(baseCol.set(stickColor), STICK_LEVEL);
   if (me) me.setColor(me.color);
   for (const pr of peers.values()) pr.av.setColor(pr.av.color);
@@ -5694,6 +5726,7 @@ function applyQuality(q, byUser) {
   for (const m of mirrors) { m.visible = mirrorsOn; if (m.userData.fallback) m.userData.fallback.visible = !mirrorsOn; }
 }
 $('#quality').addEventListener('click', e => { const b = e.target.closest('button'); if (b) applyQuality(b.dataset.q, true); });
+$('#qualityHud').addEventListener('click', e => { const b = e.target.closest('button'); if (b) applyQuality(b.dataset.q, true); });
 /* keep it smooth on weaker phones: watch the frame rate and step down automatically */
 const perf = { t0: 0, frames: 0, slow: 0, thinned: false, userPicked: userQ === 'lite' || userQ === 'high' };
 function thinCrowd() {
@@ -7431,7 +7464,7 @@ for (let i = 0; i < 24; i++) {
 for (const rr of [6, 10, 13.5, 15.4]) { const pts = []; for (let i = 0; i <= 96; i++) { const a = i / 96 * Math.PI * 2; const y = VEN.C.y + Math.sqrt(Math.max(0, (VEN.R + 0.78) ** 2 - rr * rr)); pts.push(new THREE.Vector3(VEN.C.x + Math.sin(a) * rr, y, VEN.C.z + Math.cos(a) * rr)); } shellRibs.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), ribMat)); }
 cineScene.add(shellRibs);
 const floorR = 14;
-const floorMat = new THREE.MeshStandardMaterial({ color: '#111b20', roughness: .82, metalness: .08 });
+const floorMat = new THREE.MeshStandardMaterial({ color: '#111b20', roughness: .82, metalness: .08, side: THREE.DoubleSide }); // double-sided: the base is solid seen from below too
 const plazaGroup = new THREE.Group(); plazaGroup.name = 'plaza'; cineScene.add(plazaGroup);
 /* Cinema-local confetti: a separate shallow pool falls from the Sphere ceiling into the seated room. */
 const cinemaConfetti = { n: isTouch ? 240 : 520, data: [], active: [], next: 0, mesh: null };
@@ -7470,14 +7503,16 @@ function updateCinemaConfetti(dt, t) {
     const top = VEN.C.y + cap - .6, bottom = Math.max(.08, VEN.C.y - cap + .28);
     c.r.x += c.w.x * dt; c.r.y += c.w.y * dt; c.r.z += c.w.z * dt;
     if (c.p.y > top) { c.p.y = top; c.v.y = -Math.abs(c.v.y) * .15; }
-    const gy = bottom + Math.max(0, radial - 8) * .025;
+    const gy = Math.max(bottom + Math.max(0, radial - 8) * .025, cinemaGroundY(c.p.x, c.p.z) + .06); // lands on the rake treads, never inside the rake mass
     if (c.p.y <= gy) { c.p.y = gy; c.on = false; active[k] = active[active.length - 1]; active.pop(); }
     confDummy.position.copy(c.p); confDummy.rotation.copy(c.r); confDummy.scale.set(1, 1, 1); confDummy.updateMatrix(); mesh.setMatrixAt(i, confDummy.matrix);
   }
   mesh.instanceMatrix.needsUpdate = true;
 }
 { const f = new THREE.Mesh(new THREE.CircleGeometry(floorR, 160), floorMat); f.rotation.x = -Math.PI / 2; f.position.set(VEN.F.x, 0, VEN.F.z + 6); cineScene.add(f);
-  const ground = new THREE.Mesh(new THREE.CircleGeometry(72, 96), new THREE.MeshStandardMaterial({ color: '#05090b', roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.set(VEN.C.x, -.08, VEN.C.z); plazaGroup.add(ground);
+  /* A second floor plate fills the whole cross-section of the sphere at floor level (the first one stops short at the back), so nothing under the rake is open to the sky or to the camera. */
+  const fb = new THREE.Mesh(new THREE.CircleGeometry(Math.sqrt(VEN.R * VEN.R - VEN.C.y * VEN.C.y) - .08, 128), floorMat); fb.rotation.x = -Math.PI / 2; fb.position.set(VEN.C.x, -.004, VEN.C.z); cineScene.add(fb);
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(72, 96), new THREE.MeshStandardMaterial({ color: '#05090b', roughness: 1, side: THREE.DoubleSide })); ground.rotation.x = -Math.PI / 2; ground.position.set(VEN.C.x, -.08, VEN.C.z); plazaGroup.add(ground);
   /* Two side doors in the base of the sphere; people walk in and climb the side stairs to their row. */
   const doorMat = new THREE.MeshStandardMaterial({ color: '#171b20', roughness: .62, metalness: .28 }), doorInsetMat = new THREE.MeshStandardMaterial({ color: '#030506', roughness: .92 }), trimMat = new THREE.MeshStandardMaterial({ color: '#272e33', roughness: .44, metalness: .7 }), pushMat = new THREE.MeshStandardMaterial({ color: '#b5c0c1', roughness: .26, metalness: .8 }), exitMat = new THREE.MeshBasicMaterial({ color: '#ff344d', toneMapped: false });
   const fr = Math.sqrt(VEN.R * VEN.R - (VEN.C.y - 1.2) ** 2) - .3;
@@ -7537,7 +7572,7 @@ const seatGeo = (() => mergeGeometries([new THREE.BoxGeometry(0.5, 0.12, 0.48).t
 const seatMesh = new THREE.InstancedMesh(seatGeo, new THREE.MeshStandardMaterial({ roughness: .82, metalness: .05 }), SEATED.length);
 const hapticMat = new THREE.MeshBasicMaterial({ color: '#ffffff', toneMapped: false }), hapticSeats = SEATED.filter(s => TIERS[s.tier].haptic);
 const hapticMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(0.44, 0.03, 0.04), hapticMat, hapticSeats.length);
-const bowlMat = new THREE.MeshStandardMaterial({ color: '#0b0d11', roughness: .93, side: THREE.DoubleSide });
+const bowlMat = new THREE.MeshStandardMaterial({ color: '#0b0d11', roughness: .93, side: THREE.DoubleSide, transparent: false, depthWrite: true }); // the rake is one solid mass: opaque from every side
 {
   const o = new THREE.Object3D(), c = new THREE.Color();
   SEATED.forEach((s, i) => { o.position.set(s.x, s.y, s.z); o.rotation.set(0, s.yaw, 0); o.updateMatrix(); seatMesh.setMatrixAt(i, o.matrix); seatMesh.setColorAt(i, c.set(TIERS[s.tier].fabric)); });
@@ -7546,73 +7581,116 @@ const bowlMat = new THREE.MeshStandardMaterial({ color: '#0b0d11', roughness: .9
   const parts = [], aislePts = [], L = LEVELS[0];
   const sector = (r0, r1, y, span) => { const g = new THREE.RingGeometry(r0, r1, 160, 1, -Math.PI / 2 - span, span * 2); g.rotateX(-Math.PI / 2); g.translate(VEN.F.x, y, VEN.F.z); return g.toNonIndexed(); };
   const wall = (r, y0, y1, span) => { const g = new THREE.CylinderGeometry(r, r, Math.max(.01, y1 - y0), 160, 1, true, -span, span * 2); g.translate(VEN.F.x, (y0 + y1) / 2, VEN.F.z); return g.toNonIndexed(); };
-  for (let r = 0; r < L.rows; r++) { const rr = L.r0 + r * L.depth, y = (L.y0 ?? 0.55) + r * L.rise, yp = r ? y - L.rise : 0, fs = ROW_SPAN[r].floor; parts.push(sector(rr - L.depth / 2, rr + L.depth / 2, y, fs), wall(rr - L.depth / 2, yp, y, fs)); for (const sg of [-1, 1]) { const sa = sg * (ROW_SPAN[r].seats + (fs - ROW_SPAN[r].seats) / 2), st = new THREE.BoxGeometry(WALK_W * .92, L.rise / 2, L.depth / 2); st.rotateY(sa); st.translate(VEN.F.x + Math.sin(sa) * (rr - L.depth / 4), y - L.rise * .75 + .001, VEN.F.z + Math.cos(sa) * (rr - L.depth / 4)); parts.push(st.toNonIndexed()); } for (let k = -6; k <= 6; k++) { const a = k * rad(15), ar = rr + .28; if (Math.abs(a) < ROW_SPAN[r].seats) aislePts.push(VEN.F.x + Math.sin(a) * ar, y + .035, VEN.F.z + Math.cos(a) * ar); } }
+  for (let r = 0; r < L.rows; r++) { const rr = L.r0 + r * L.depth, y = (L.y0 ?? 0.55) + r * L.rise, yp = r ? y - L.rise : 0, fs = ROW_SPAN[r].floor; parts.push(sector(rr - L.depth / 2, rr + L.depth / 2, y, fs), wall(rr - L.depth / 2, yp, y, fs), wall(rr - L.depth / 2 - .035, yp - .02, y + .08, fs)); for (const sg of [-1, 1]) { const sa = sg * (ROW_SPAN[r].seats + (fs - ROW_SPAN[r].seats) / 2), st = new THREE.BoxGeometry(WALK_W * .92, L.rise / 2, L.depth / 2); st.rotateY(sa); st.translate(VEN.F.x + Math.sin(sa) * (rr - L.depth / 4), y - L.rise * .75 + .001, VEN.F.z + Math.cos(sa) * (rr - L.depth / 4)); parts.push(st.toNonIndexed()); } for (let k = -6; k <= 6; k++) { const a = k * rad(15), ar = rr + .28; if (Math.abs(a) < ROW_SPAN[r].seats) aislePts.push(VEN.F.x + Math.sin(a) * ar, y + .035, VEN.F.z + Math.cos(a) * ar); } }
   parts.push(wall(L.r0 + (L.rows - .5) * L.depth, (L.y0 ?? 0.55) + (L.rows - 1) * L.rise, (L.y0 ?? 0.55) + (L.rows - 1) * L.rise + 1.2, ROW_SPAN[L.rows - 1].floor));
+  /* Solid under the seats: every row is a closed block from the floor up to its tread. Side cheeks at both row ends and a back face close the rake,
+     so the floor (and the confetti lying on it) can never be seen through or under the seating from the orbit camera. */
+  const cheek = (a, ra, rb, y1) => {
+    const sa = Math.sin(a), ca = Math.cos(a), g = new THREE.BufferGeometry(), A = [VEN.F.x + sa * ra, 0, VEN.F.z + ca * ra], B = [VEN.F.x + sa * rb, 0, VEN.F.z + ca * rb], C = [VEN.F.x + sa * rb, y1, VEN.F.z + ca * rb], D = [VEN.F.x + sa * ra, y1, VEN.F.z + ca * ra];
+    g.setAttribute('position', new THREE.Float32BufferAttribute([...A, ...B, ...C, ...A, ...C, ...D], 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(new Array(12).fill(0), 2)); g.computeVertexNormals(); return g;
+  };
+  for (let r = 0; r < L.rows; r++) {
+    const rr = L.r0 + r * L.depth, y = (L.y0 ?? 0.55) + r * L.rise, fs = ROW_SPAN[r].floor;
+    parts.push(cheek(-fs, rr - L.depth / 2, rr + L.depth / 2, y), cheek(fs, rr - L.depth / 2, rr + L.depth / 2, y), wall(rr + L.depth / 2, 0, y, fs));
+  }
   cineScene.add(new THREE.Mesh(mergeGeometries(parts), bowlMat));
   const ag = new THREE.BufferGeometry(); ag.setAttribute('position', new THREE.Float32BufferAttribute(aislePts, 3)); cineScene.add(new THREE.Points(ag, new THREE.PointsMaterial({ color: '#ffb35c', size: .09, sizeAttenuation: true, toneMapped: false })));
 }
-// Cinema audience follows the original EXhOrizon game language: compact capsule bodies plus separate flat hex lightsticks.
-// The small silhouettes read cleanly at distance, while each seat still gets its own timing and hand position.
+// Cinema audience: compact capsule bodies, each holding a small hexagonal lightstick (dark handle + glowing hex head + a soft hex-shaped halo attached to it).
+// Every pose is a smooth function of the shared show beat (120 BPM), so the room moves together like a broadcast crowd shot:
+// sticks swing over 2 beats, bodies bob on the beat, slow waves roll across the rows by seat angle, colours follow the cue palette in sync.
 const people = SEATS.filter(s => s.filled);
-const cinemaAudience = { body: null, sticks: null, data: [], palette: '' };
+const cinemaAudience = { body: null, handle: null, sticks: null, stickGlow: null, data: [], palette: '' };
+const CINE_HEX_R = 0.085, CINE_HEX_Y = 0.28; // lightstick head radius (m) and the height of its centre above the hand
+const AUD_TAU = Math.PI * 2;
+const seatRestM = SEATED.map(s => new THREE.Matrix4().compose(new THREE.Vector3(s.x, s.y, s.z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), s.yaw), new THREE.Vector3(1, 1, 1)));
+const audO = new THREE.Object3D(), audM = new THREE.Matrix4(), audC = new THREE.Color(); audO.rotation.order = 'YXZ';
+const cineCrowd = { E: .74, hype: 0, wave: 0, chase: 0, pulse: 0, twk: 0, ready: false }; // smoothed "mood" of the room
 {
-  const bodyMat = new THREE.MeshLambertMaterial({ color: '#10202a', vertexColors: true });
-  const stickMat = new THREE.MeshBasicMaterial({ color: '#ffffff', vertexColors: true, toneMapped: false, side: THREE.DoubleSide });
+  const bodyMat = new THREE.MeshStandardMaterial({ color: '#183b48', roughness: .76, metalness: .04, emissive: '#0b3542', emissiveIntensity: .48 });
+  // head colour comes from the per-instance colour (no vertexColors here: the hex geometry has no colour attribute and would render black)
+  const stickMat = new THREE.MeshBasicMaterial({ color: '#ffffff', toneMapped: false, side: THREE.DoubleSide });
+  const handleMat = new THREE.MeshStandardMaterial({ color: '#10161a', roughness: .55, metalness: .3 });
+  const glowMat = new THREE.MeshBasicMaterial({ color: '#ffffff', vertexColors: true, transparent: true, opacity: .8, toneMapped: false, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending });
+  // soft hexagonal halo: a flat hex ring in the head's own plane that fades from the head's rim to nothing (only ~1 head-radius wide)
+  const glowGeo = (() => {
+    const radii = [CINE_HEX_R * .9, CINE_HEX_R * 1.25, CINE_HEX_R * 1.9], lum = [.5, .17, 0], pos = [], col = [];
+    const vtx = (k, ring) => { const an = k * Math.PI / 3; pos.push(Math.cos(an) * radii[ring], CINE_HEX_Y + Math.sin(an) * radii[ring], 0); col.push(lum[ring], lum[ring], lum[ring]); };
+    for (let ring = 0; ring < 2; ring++) for (let k = 0; k < 6; k++) { vtx(k, ring); vtx(k, ring + 1); vtx(k + 1, ring + 1); vtx(k, ring); vtx(k + 1, ring + 1); vtx(k + 1, ring); }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3)); return g;
+  })();
   cinemaAudience.body = new THREE.InstancedMesh(new THREE.CapsuleGeometry(.2, .72, 2, 6), bodyMat, people.length);
-  cinemaAudience.sticks = new THREE.InstancedMesh(STICK.crowd, stickMat, people.length);
-  cinemaAudience.body.frustumCulled = false; cinemaAudience.sticks.frustumCulled = false;
-  const dummy = new THREE.Object3D(), bodyCol = new THREE.Color(), stickCol = new THREE.Color();
+  cinemaAudience.sticks = new THREE.InstancedMesh(hexGeo(CINE_HEX_R).translate(0, CINE_HEX_Y, 0), stickMat, people.length);
+  cinemaAudience.handle = new THREE.InstancedMesh(new THREE.CylinderGeometry(.011, .015, .3, 6).translate(0, .07, 0), handleMat, people.length);
+  cinemaAudience.stickGlow = new THREE.InstancedMesh(glowGeo, glowMat, people.length);
+  // handle, head and halo are one rigid lightstick pivoting at the hand: they share one per-instance matrix buffer
+  cinemaAudience.handle.instanceMatrix = cinemaAudience.sticks.instanceMatrix; cinemaAudience.stickGlow.instanceMatrix = cinemaAudience.sticks.instanceMatrix;
+  for (const m of [cinemaAudience.body, cinemaAudience.handle, cinemaAudience.sticks, cinemaAudience.stickGlow]) m.frustumCulled = false;
+  cinemaAudience.stickGlow.renderOrder = 3;
+  const bodyCol = new THREE.Color(), stickCol = new THREE.Color('#ffffff');
   people.forEach((s, i) => {
-    const scale = .78 + hash2(i + 31, s.row + 5) * .32;
-    const rightX = Math.cos(s.yaw), rightZ = -Math.sin(s.yaw);
-    const frontX = -Math.sin(s.yaw), frontZ = -Math.cos(s.yaw);
-    const stageYaw = Math.atan2(VEN.F.x - s.x, VEN.F.z - s.z);
-    const a = { seat: s, phase: hash2(i + 11, s.row + 3) * Math.PI * 2, rate: .7 + hash2(i + 5, 2) * .72, wave: .28 + hash2(i + 9, 7) * .32, jumpEvery: 2.8 + hash2(i + 4, 19) * 5.5, jumpPhase: hash2(i + 2, 29) * 8, jumpHeight: .035 + hash2(i + 3, 31) * .14, sway: .018 + hash2(i + 8, 1) * .05, stickTilt: (hash2(i + 7, 41) - .5) * .34, scale, rightX, rightZ, frontX, frontZ, stageYaw };
+    const a = { seat: s, si: SEATED.indexOf(s), ph: (hash2(i + 11, s.row + 3) - .5) * .15, amp: .92 + hash2(i + 5, 2) * .16, tilt: (hash2(i + 7, 41) - .5) * .12, scale: .78 + hash2(i + 31, s.row + 5) * .32, ss: .93 + hash2(i + 23, 3) * .14, hx: hash2(i + 13, 8) > .86 ? -.25 : .27, hy: 1.03 + (hash2(i + 9, 7) - .5) * .08, hz: -.1 - hash2(i + 4, 19) * .07, u: s.yaw + s.row * .03, col: new THREE.Color('#ffffff') };
     cinemaAudience.data.push(a);
-    dummy.position.set(s.x, s.y + .56, s.z); dummy.rotation.set(0, s.yaw, 0); dummy.scale.set(scale, scale, scale); dummy.updateMatrix(); cinemaAudience.body.setMatrixAt(i, dummy.matrix);
-    bodyCol.setHSL(.53 + hash2(i + 17, 4) * .08, .22, .045 + hash2(i + 19, 6) * .045); cinemaAudience.body.setColorAt(i, bodyCol);
-    dummy.position.set(s.x + rightX * .22 + frontX * .14, s.y + 1.38, s.z + rightZ * .22 + frontZ * .14); dummy.rotation.set(0, stageYaw, a.stickTilt); dummy.scale.setScalar(1.05 + hash2(i + 23, 3) * .25); dummy.updateMatrix(); cinemaAudience.sticks.setMatrixAt(i, dummy.matrix);
-    stickCol.set('#ffffff'); cinemaAudience.sticks.setColorAt(i, stickCol);
+    bodyCol.setHSL(.53 + hash2(i + 17, 4) * .08, .28, .12 + hash2(i + 19, 6) * .07); cinemaAudience.body.setColorAt(i, bodyCol);
+    cinemaAudience.sticks.setColorAt(i, stickCol);
   });
-  cinemaAudience.body.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceMatrix.needsUpdate = true;
-  cineScene.add(cinemaAudience.body, cinemaAudience.sticks);
+  cinemaAudience.stickGlow.instanceColor = cinemaAudience.sticks.instanceColor; // the halo wears the same (animated) colour as the head
+  cineScene.add(cinemaAudience.body, cinemaAudience.handle, cinemaAudience.sticks, cinemaAudience.stickGlow);
 }
-function updateSeatedAudience(dt, now, t) {
-  const pal = SHOW.cue.cols, palette = pal.join('|');
-  if (cinemaAudience.palette !== palette) {
-    cinemaAudience.palette = palette;
-    cinemaAudience.data.forEach((a, i) => cinemaAudience.sticks.setColorAt(i, new THREE.Color(pal[(i + Math.floor(t / 8)) % pal.length])));
-    cinemaAudience.sticks.instanceColor.needsUpdate = true;
+/* Smooth palette sampler: holds each colour for a while, then eases to the next one (p is in palette steps, any real number). */
+function cinePalAt(pal, p, out) {
+  const n = pal.length, i0 = Math.floor(p), k = ((i0 % n) + n) % n; let s = clamp((p - i0 - .3) / .4, 0, 1); s = s * s * (3 - 2 * s);
+  return out.copy(pal[k]).lerp(pal[(k + 1) % n], s);
+}
+/* b = SHOW.b, the continuous beat count (120 BPM). Everything below is a smooth function of b and the seat position:
+   the whole room moves together, with small per-person phase offsets (+-0.075 beat), plus occasional slow waves across the rows. */
+function updateSeatedAudience(dt, now, b) {
+  const cue = SHOW.cue, pal = cue.cols, st = cue.stick, cc = cineCrowd, ke = 1 - Math.exp(-dt * 1.4), data = cinemaAudience.data;
+  // the room's mood eases between cues instead of switching
+  cc.E += ((cue.strobe ? 1 : (cue.chase || cue.drumLow) ? .9 : st === 'solid' ? .62 : .76) - cc.E) * ke;
+  cc.hype += ((cue.strobe ? 1 : cue.chase ? .5 : 0) - cc.hype) * ke;
+  cc.wave += ((st === 'wave' ? 1 : st === 'rainbow' ? .8 : st === 'twinkle' ? .5 : 0) - cc.wave) * ke;
+  cc.chase += ((cue.chase ? 1 : 0) - cc.chase) * ke;
+  cc.pulse += ((st === 'pulse' ? 1 : 0) - cc.pulse) * ke;
+  cc.twk += ((st === 'twinkle' ? 1 : 0) - cc.twk) * ke;
+  const E = cc.E, bobAmp = (.016 + .036 * cc.hype) * E, swing = .5 * E, kcol = cc.ready ? 1 - Math.exp(-dt * 3) : 1;
+  const kc = .5 + .5 * Math.cos(AUD_TAU * b), kick = kc * kc, hit = kc * kc * kc;
+  // a slow wave rolls across the room (by seat angle, slightly front-to-back) for 10 beats out of every 24, alternating direction
+  const cyc = b / 24, kw = Math.floor(cyc), wp = (cyc - kw) * 2.4, wOn = cc.wave > .01 && wp < 1, wc = .25 + (kw % 2 === 0 ? 1 : -1) * (wp - .5) * 4.8;
+  const ic = cinemaAudience.sticks.instanceColor.array;
+  for (let i = 0; i < data.length; i++) {
+    const a = data[i], row = a.seat.row, pb = b - a.ph, c = .5 + .5 * Math.cos(AUD_TAU * pb), bob = c * c, sw = Math.sin(Math.PI * pb);
+    const du = a.u - wc, g = wOn ? Math.exp(-du * du / .1156) * cc.wave : 0;
+    const base = seatRestM[a.si]; // the seat's fixed frame (seats never move)
+    // body (seat-local): eased bob on the beat, a slight lean over 2 beats, a tiny forward nod; never stretched
+    const lean = .03 * E * Math.sin(Math.PI * pb - .5), nod = -.02 * E * bob;
+    audO.position.set(.46 * Math.sin(lean), .56 + bobAmp * bob + .035 * g, .46 * Math.sin(nod)); audO.rotation.set(nod, 0, -lean); audO.scale.setScalar(a.scale); audO.updateMatrix();
+    audM.multiplyMatrices(base, audO.matrix); cinemaAudience.body.setMatrixAt(i, audM);
+    // lightstick: pivots at the hand, swings side to side over 2 beats with a small forward/back figure-eight; the wave lifts it
+    audO.position.set(a.hx + .055 * E * sw, a.hy + bobAmp * bob + .03 * E * bob + .155 * g, a.hz);
+    audO.rotation.set(.09 * E * Math.sin(AUD_TAU * pb - 1.2), 0, -(swing * a.amp * (1 + .45 * g) * sw + a.tilt)); audO.scale.setScalar(a.ss); audO.updateMatrix();
+    audM.multiplyMatrices(base, audO.matrix); cinemaAudience.sticks.setMatrixAt(i, audM);
+    // colour: one central "lighting desk" for the whole room, following the cue palette; patterns are spatial/temporal gradients, never per-person noise
+    if (st === 'rainbow') audC.setHSL(((b * .012 + a.u * .16) % 1 + 1) % 1, .85, .56);
+    else {
+      let p = b / 16 - a.u * .12;                                      // solid: the whole room drifts through the palette together
+      if (st === 'wave') p = b / 8 - a.u * .9;                         // colour bands roll across the room
+      else if (st === 'split') { const x = clamp((a.seat.yaw + .12) / .24, 0, 1); p = b / 16 + x * x * (3 - 2 * x); } // left/right halves, offset by one colour
+      else if (st === 'twinkle') p = b / 8 - a.u * .35 - row * .04;    // gentle drifting gradient (shimmer is in the brightness below)
+      else if (st === 'pulse') p = b / 16;
+      cinePalAt(pal, p, audC);
+    }
+    const br = (.92 + .08 * kick) * (1 - cc.pulse * .6 * (1 - hit)) * (1 - cc.twk * .18 * (.5 - .5 * Math.sin(b * 1.2 - a.u * 2.4 - row * .3))) * (1 - cc.chase * .5 * (.5 - .5 * Math.sin(b * Math.PI * .5 - row * .55 - a.u * .4))) + .35 * g;
+    a.col.lerp(audC, kcol);
+    const m = 1.35 * br, o = i * 3; ic[o] = a.col.r * m; ic[o + 1] = a.col.g * m; ic[o + 2] = a.col.b * m;
   }
-  const dummy = new THREE.Object3D();
-  cinemaAudience.data.forEach((a, i) => {
-    const local = t * a.rate + a.phase;
-    const active = Math.sin(local * .21 + a.phase) > -.55;
-    const wave = active ? .5 + .5 * Math.sin(local * 1.15 + a.phase) : .12;
-    const jumpClock = (t + a.jumpPhase) % a.jumpEvery;
-    const jump = active && jumpClock < .72 ? Math.sin(jumpClock / .72 * Math.PI) * a.jumpHeight : 0;
-    const bodySway = Math.sin(local * .24 + a.phase) * a.sway;
-    dummy.position.set(a.seat.x, a.seat.y + .56 + jump, a.seat.z);
-    dummy.rotation.set(0, a.seat.yaw, bodySway);
-    dummy.scale.set(a.scale, a.scale * (1 + jump * 1.5), a.scale);
-    dummy.updateMatrix(); cinemaAudience.body.setMatrixAt(i, dummy.matrix);
-    const stickWave = Math.sin(local * 1.55 + a.phase) * a.wave;
-    dummy.position.set(a.seat.x + a.rightX * (.22 + stickWave * .05) + a.frontX * .14, a.seat.y + 1.38 + jump + Math.abs(stickWave) * .05, a.seat.z + a.rightZ * (.22 + stickWave * .05) + a.frontZ * .14);
-    dummy.rotation.set(stickWave * .22, a.stageYaw, a.stickTilt + stickWave);
-    dummy.scale.setScalar(1.05 + a.scale * .18);
-    dummy.updateMatrix(); cinemaAudience.sticks.setMatrixAt(i, dummy.matrix);
-  });
-  cinemaAudience.body.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceMatrix.needsUpdate = true;
+  cc.ready = true;
+  cinemaAudience.body.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceMatrix.needsUpdate = true; cinemaAudience.sticks.instanceColor.needsUpdate = true;
 }
-const cineStickU = { uBeat: { value: 0 }, uCol: { value: new THREE.Color() }, uCol2: { value: new THREE.Color() }, uPx: { value: 1 }, uPat: { value: 0 } };
-{
-  const n = people.length, pos = new Float32Array(n * 3), ph = new Float32Array(n * 2);
-  people.forEach((s, i) => { const rx = Math.cos(s.yaw), rz = -Math.sin(s.yaw), fx = -Math.sin(s.yaw), fz = -Math.cos(s.yaw); pos[i * 3] = s.x + rx * .26 + fx * .16; pos[i * 3 + 1] = s.y + 1.62; pos[i * 3 + 2] = s.z + rz * .26 + fz * .16; ph[i * 2] = (i * .618) % 1; ph[i * 2 + 1] = Math.atan2(s.x - VEN.F.x, s.z - VEN.F.z); });
-  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aPh', new THREE.BufferAttribute(ph, 2));
-  const m = new THREE.ShaderMaterial({ uniforms: cineStickU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexShader: `uniform float uBeat, uPx, uPat; attribute vec2 aPh; varying float vA, vMix; void main() { vec3 p = position; float sw = sin((uBeat + aPh.x * .3) * 3.14159); p.y += .15 * sw; vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; gl_PointSize = uPx * 30.0 / -mv.z; float wave = .5 + .5 * sin(aPh.y * 3.0 - uBeat * .785); vA = mix(.85 + .15 * sw, .35 + .9 * pow(wave, 4.0), uPat); vMix = mix(step(.5, fract(aPh.x * 7.0 + floor(uBeat / 4.0) * .5)), wave, uPat); }`, fragmentShader: `uniform vec3 uCol, uCol2; varying float vA, vMix; void main() { float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0.0, d); a *= a; gl_FragColor = vec4(mix(uCol, uCol2, vMix) * (a * 1.5 + smoothstep(.12, 0.0, d) * 2.0) * vA, 1.0); }` });
-  const p = new THREE.Points(g, m); p.frustumCulled = false; p.visible = false; cineScene.add(p);
-}
-const cineHemi = new THREE.HemisphereLight('#d6e8f0', '#0b1015', 1.18); cineScene.add(cineHemi);
+/* Haptic seats: seats, light strips and the camera are static (the old beat-locked seat/camera shake was removed: it made people dizzy).
+   What remains of "haptics" in the cinema is the calm light-strip colour pulse in updateCinema(). */
+const cineHemi = new THREE.HemisphereLight('#dff7ff', '#16252d', 1.55); cineScene.add(cineHemi);
+const cinemaCrowdFill = new THREE.PointLight('#9fe8ff', 34, 42, 1.45); cinemaCrowdFill.position.set(0, 12, 1); cineScene.add(cinemaCrowdFill);
 const spillSample = new THREE.Color('#7fa8b4'), spillTarget = new THREE.Color();
 const spillRT = new THREE.WebGLRenderTarget(3, 1, { type: THREE.UnsignedByteType, depthBuffer: false, stencilBuffer: false });
 const spillScene = new THREE.Scene(), spillCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -7646,17 +7724,44 @@ const techG = new THREE.Group(); techG.visible = false; cineScene.add(techG);
 }
 
 /* ---------- camera: your place (look around everywhere), or the cutaway ---------- */
-const cv = { mode: 'seat', seat: null, yaw: 0, pitch: rad(12), fov: isTouch ? 70 : 60, dolly: 0, orbit: rad(55), orbitPitch: rad(28), dist: 78, drag: null, gyro: null, stepBack: false, previewUntil: 0, walkPos: new THREE.Vector3(), walkYaw: 0, walkPitch: rad(8) };
+const cv = { mode: 'seat', seat: null, yaw: 0, pitch: rad(12), fov: isTouch ? 70 : 60, dolly: 0, orbit: rad(55), orbitPitch: rad(28), dist: 78, drag: null, gyro: null, stepBack: false, previewUntil: 0, walkPos: new THREE.Vector3(), walkYaw: 0, walkPitch: rad(8), person: 'third', walkJumpT: -9e9, walkGrounded: true, walkSpawned: false };
 function pickHaloSeat(s, quiet) {
   cv.seat = s; cv.yaw = 0; cv.pitch = rad(12); cv.fov = isTouch ? 70 : 60; cv.dolly = 0; cv.stepBack = false; cv.previewUntil = performance.now() + 850; store.set('halo-seat2', SEATS.indexOf(s));
   const c = new THREE.Color(); SEATED.forEach((q, i) => seatMesh.setColorAt(i, c.set(q === s ? '#c9a24a' : TIERS[q.tier].fabric))); seatMesh.instanceColor.needsUpdate = true;
   renderSeatCard(); if (!quiet) setCineView('seat');
 }
-function setCineView(m) {
-  cv.mode = m; if (m === 'walk' && cv.seat) { cv.walkPos.copy(cv.seat.eye); cv.walkYaw = cv.seat.yaw; cv.walkPitch = rad(8); } if (m !== 'cut') cutPlane.constant = 1e4;
-  document.querySelectorAll('#cv button[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === m));
-  $('#hc-hint').textContent = m === 'seat' ? (isTouch ? 'Drag to look around · look up! · pinch to dolly' : 'Drag to look around · scroll to dolly') : m === 'walk' ? 'WASD / arrows to walk · drag to look · tap a seat to sit' : 'Drag to turn the building';
+/* "How do I walk?" hint: shown each time you enter walk mode until you have actually moved once, and gone a few seconds later (or at the first move). */
+const walkHint = { el: null, t: 0, done: false };
+function showWalkHint() {
+  if (walkHint.done) return;
+  if (!walkHint.el) { walkHint.el = document.createElement('div'); walkHint.el.id = 'walkHint'; walkHint.el.setAttribute('role', 'status'); document.body.appendChild(walkHint.el); }
+  walkHint.el.innerHTML = isTouch ? 'Drag the <b>joystick</b> to walk &middot; tap <b>Jump</b> to hop onto the chairs' : 'Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or the <kbd>&larr;</kbd><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd> arrow keys to walk<br><kbd>Shift</kbd> to run &middot; <kbd>Space</kbd> to jump';
+  walkHint.el.classList.add('show'); clearTimeout(walkHint.t); walkHint.t = setTimeout(hideWalkHint, 12000);
 }
+function hideWalkHint(moved) { clearTimeout(walkHint.t); walkHint.el?.classList.remove('show'); if (moved) walkHint.done = true; }
+function setCineView(m) {
+  const wasWalk = cv.mode === 'walk';
+  cv.mode = m;
+  if (m === 'walk') { // stand up on open ground near the chosen seat each time you enter walk mode (and when the seat changes); blend the camera in from wherever it was
+    if (cv.seat && (!wasWalk || cinemaMove.seat !== cv.seat)) { spawnCinemaWalker(cv.seat); cv.walkSpawned = true; }
+    if (!wasWalk || cinemaMove.person !== cv.person) cinemaWalkCameraStart();
+    if (!wasWalk) { keyPend.clear(); showWalkHint(); }
+  }
+  if (m !== 'cut') cutPlane.constant = 1e4;
+  const modes = $('#cineViewModes'); if (modes) modes.hidden = m !== 'walk';
+  document.body.classList.toggle('cinema-walk', m === 'walk');
+  if (m !== 'walk') {
+    hideWalkHint();
+    if (me && me.g.parent !== scene) scene.add(me.g);
+    if (cinemaWalkers.local) cinemaWalkers.local.hide(); // the cinema mannequin stays in the cinema scene, just hidden while you are seated / orbiting
+    for (const p of peers.values()) if (p.av.g.parent !== scene) scene.add(p.av.g);
+  }
+  document.querySelectorAll('#cv button[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === m));
+  document.querySelectorAll('#cineViewModes [data-person]').forEach(b => b.classList.toggle('on', b.dataset.person === cv.person));
+  $('#hc-hint').textContent = m === 'seat' ? (isTouch ? 'Drag to look around · look up! · pinch to dolly' : 'Drag to look around · scroll to dolly') : m === 'walk' ? (isTouch ? 'Drag to look · joystick to walk · tap Jump to hop onto chairs · switch view below' : 'W A S D or arrow keys to walk · Shift to run · Space to jump onto chairs · drag to look · switch view below') : 'Drag to turn the building';
+}
+/* The orbit (Full view / cutaway) camera stays above the ground plane: it can never slip underneath the building and look up through the base. */
+const orbitMinPitch = () => Math.max(rad(-12), Math.asin(clamp((.9 - VEN.C.y) / Math.max(cv.dist, 3), -1, 1)));
 const cvs2 = renderer.domElement;
 cvs2.addEventListener('pointerdown', e => { cv.drag = { x: e.clientX, y: e.clientY, id: e.pointerId }; cvs2.setPointerCapture(e.pointerId); });
 cvs2.addEventListener('pointermove', e => {
@@ -7665,12 +7770,18 @@ cvs2.addEventListener('pointermove', e => {
   const k = cv.fov / 84 * 0.0042;
   if (cv.mode === 'walk') { cv.walkYaw += dx * 0.006; cv.walkPitch = clamp(cv.walkPitch + dy * 0.005, rad(-35), rad(75)); return; }
   if (cv.mode === 'seat') { cv.yaw += dx * k; cv.pitch = clamp(cv.pitch + dy * k, rad(-40), rad(88)); }
-  else { cv.orbit -= dx * 0.005; cv.orbitPitch = clamp(cv.orbitPitch + dy * 0.004, rad(-12), rad(82)); }
+  else { cv.orbit -= dx * 0.005; cv.orbitPitch = clamp(cv.orbitPitch + dy * 0.004, orbitMinPitch(), rad(82)); }
 });
 const endDrag = e => { if (cv.drag && cv.drag.id === e.pointerId) cv.drag = null; };
 cvs2.addEventListener('pointerup', endDrag); cvs2.addEventListener('pointercancel', endDrag);
 cvs2.addEventListener('dblclick', e => { if (cv.mode !== 'seat' || !cv.seat) return; cv.yaw = 0; cv.pitch = rad(12); cv.fov = isTouch ? 70 : 60; cv.dolly = 0; cv.stepBack = false; });
-cvs2.addEventListener('wheel', e => { e.preventDefault(); if (cv.mode === 'seat') cv.dolly = clamp(cv.dolly - e.deltaY * 0.012, -1, 6); else cv.dist = clamp(cv.dist + e.deltaY * 0.06, 3, 220); }, { passive: false });
+let wheelAcc = 0, wheelT = 0; // walk mode: a deliberate scroll switches first / third person; a stray trackpad brush does not (first person hides the character)
+cvs2.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (cv.mode === 'seat') cv.dolly = clamp(cv.dolly - e.deltaY * 0.012, -1, 6);
+  else if (cv.mode === 'walk') { wheelAcc += e.deltaY; clearTimeout(wheelT); wheelT = setTimeout(() => { wheelAcc = 0; }, 250); if (Math.abs(wheelAcc) >= 160) { const p = wheelAcc > 0 ? 'third' : 'first'; wheelAcc = 0; if (p !== cv.person) { setCinemaPerson(p); renderRide(); } } }
+  else cv.dist = clamp(cv.dist + e.deltaY * 0.06, 3, 220);
+}, { passive: false });
 { let pinch = 0;
   cvs2.addEventListener('touchstart', e => { if (e.touches.length === 2) pinch = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }, { passive: true });
   cvs2.addEventListener('touchmove', e => { if (e.touches.length !== 2 || !pinch) return; const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
@@ -7688,12 +7799,7 @@ async function startGyro() {
 const _ce = new THREE.Vector3(), _ct = new THREE.Vector3();
 function updateCineCamera(dt) {
   if (cv.mode === 'walk') {
-    const speed = 2.2 * dt, dir = new THREE.Vector3(), right = new THREE.Vector3();
-    const forward = (keys.has('w') || keys.has('arrowup')) ? 1 : (keys.has('s') || keys.has('arrowdown')) ? -1 : 0;
-    const strafe = (keys.has('d') || keys.has('arrowright')) ? 1 : (keys.has('a') || keys.has('arrowleft')) ? -1 : 0;
-    dir.set(-Math.sin(cv.walkYaw), 0, -Math.cos(cv.walkYaw)).multiplyScalar(forward).add(right.set(Math.cos(cv.walkYaw), 0, -Math.sin(cv.walkYaw)).multiplyScalar(strafe));
-    if (dir.lengthSq()) { dir.normalize().multiplyScalar(speed); cv.walkPos.add(dir); const maxR = OUTER_END - 1; const rr = Math.hypot(cv.walkPos.x, cv.walkPos.z - VEN.F.z); if (rr > maxR) { cv.walkPos.x *= maxR / rr; cv.walkPos.z = VEN.F.z + (cv.walkPos.z - VEN.F.z) * maxR / rr; } cv.walkPos.y = groundY(cv.walkPos.x, cv.walkPos.z) + 1.65; }
-    cineCam.position.copy(cv.walkPos); _ct.set(cv.walkPos.x - Math.sin(cv.walkYaw) * Math.cos(cv.walkPitch) * 10, cv.walkPos.y + Math.sin(cv.walkPitch) * 10, cv.walkPos.z - Math.cos(cv.walkYaw) * Math.cos(cv.walkPitch) * 10); cineCam.lookAt(_ct); cineCam.fov = isTouch ? 70 : 60; cineCam.updateProjectionMatrix(); return;
+    updateCinemaWalker(cineWalkDt); cinemaWalkCamera(cineWalkDt); return; // walker physics + mannequin + follow camera live in the walker section below
   }
   if (cv.mode === 'seat' && cv.seat) {
     const yaw = (cv.gyro ? cv.gyro.yaw : 0) + cv.yaw, pitch = cv.gyro ? cv.gyro.pitch : cv.pitch;
@@ -7702,20 +7808,18 @@ function updateCineCamera(dt) {
     if (cv.stepBack) { _ce.y += 4.8; _ce.x += Math.sin(cv.seat.yaw) * 3.8; _ce.z += Math.cos(cv.seat.yaw) * 3.8; }
     else if (performance.now() < cv.previewUntil) { _ce.y += 1.6; _ce.x += Math.sin(cv.seat.yaw) * 1.4; _ce.z += Math.cos(cv.seat.yaw) * 1.4; }
     else { const forward = new THREE.Vector3(-Math.sin(cv.seat.yaw), 0, -Math.cos(cv.seat.yaw)); _ce.addScaledVector(forward, dollyForward * 1.0 + dollyBack * -1.0); _ce.y += dollyBack * 0.42; }
-    const hp = TIERS[cv.seat.tier]?.haptic || 0;
-    const pulse = ride.haptics && cv.dolly === 0 && !cv.stepBack && performance.now() >= cv.previewUntil ? SHOW.pulse * SHOW.pulse * hp * 0.006 : 0;
-    if (pulse) { _ce.x += Math.sin(SHOW.beat * 1.7) * pulse; _ce.y -= pulse * .45; }
+    // the seat view is completely still: no beat-locked dip, roll, nod or lean (it made people dizzy)
     const nearFade = cv.dolly === 0 ? 1 : 0.12; seatMesh.material.transparent = nearFade < 1; seatMesh.material.opacity = nearFade;
     const bodies = cineScene.getObjectByName('audience-bodies'); if (bodies?.material) { bodies.material.transparent = nearFade < 1; bodies.material.opacity = nearFade; }
     // The cinema audience is instanced in cineScene and remains visible in every seat/cutaway camera.
-    cinemaAudience.body.visible = true; cinemaAudience.sticks.visible = true;
+    cinemaAudience.body.visible = true; cinemaAudience.sticks.visible = true; cinemaAudience.handle.visible = true; cinemaAudience.stickGlow.visible = true;
     const ay = cv.seat.yaw + yaw, cp = Math.cos(pitch);
     _ct.set(_ce.x - Math.sin(ay) * cp * 10, _ce.y + Math.sin(pitch) * 10, _ce.z - Math.cos(ay) * cp * 10);
     cineCam.position.copy(_ce); cineCam.up.set(0, 1, 0); cineCam.lookAt(_ct);
     if (Math.abs(cineCam.fov - cv.fov) > 0.01) { cineCam.fov += (cv.fov - cineCam.fov) * Math.min(1, dt * 10); cineCam.updateProjectionMatrix(); }
   } else {
     if (!cv.drag && cv.mode === 'cut') cv.orbit += dt * 0.05;
-    const d = cv.dist;
+    const d = cv.dist; cv.orbitPitch = Math.max(cv.orbitPitch, orbitMinPitch());
     cineCam.position.set(VEN.C.x + Math.sin(cv.orbit) * Math.cos(cv.orbitPitch) * d, VEN.C.y + Math.sin(cv.orbitPitch) * d, VEN.C.z + Math.cos(cv.orbit) * Math.cos(cv.orbitPitch) * d);
     cineCam.lookAt(VEN.C.x, 8, VEN.C.z);
     if (cineCam.fov !== 45) { cineCam.fov = 45; cineCam.updateProjectionMatrix(); }
@@ -7725,6 +7829,366 @@ function updateCineCamera(dt) {
 }
 
 
+/* ---------- cinema walker / collision / online character projection ---------- */
+const cinemaWalkers = { local: null, parented: false };
+/* Tunables. R = body radius used to push out of chairs; RS = smaller footprint used to find what you are standing on.
+   STEP = tallest chair part you can step onto without jumping (a cushion is .51, so it takes a hop; the 0.4 m rake riser is fine).
+   STEP_DOWN = how far you can walk off a ledge without it counting as a fall: .7 covers the biggest drop along the chair tops (backrest .78 -> cushion of the row below .11),
+   so walking along and down the chairs is a walk, not a string of little falls. SLICE = the longest physics slice (s): the walker is stepped in slices of at most this, whatever the frame rate. */
+const CW = { R: .17, RS: .13, STEP: .45, STEP_UP: .62, STEP_DOWN: .7, G: 18, JUMP: 6.4, WALK: 2.6, RUN: 4.4, EYE: 1.5, CAM: 3.5, CAM_MIN: .85, SLICE: 1 / 60 };
+const cinemaMove = { vx: 0, vz: 0, vy: 0, grounded: true, feet: 0, vis: 0, face: 0, speed: 0, coyote: 0, buf: 0, land: 0, under: 0, stuck: 0, seat: null, person: 'third', blend: 1, camFrom: new THREE.Vector3(), camDist: 3.5, lift: 0, piv: new THREE.Vector3() };
+const _cwD = new THREE.Vector3(), _cwP = new THREE.Vector3(), _cwT = new THREE.Vector3(), _cwQ = new THREE.Vector3();
+let cineWalkDt = 1 / 60; // real seconds since the last frame (set by loop(); loop()'s own dt is capped at 0.05 for the visuals, which would make walking slow-motion on a slow machine)
+
+/* The local character: a smooth matte light-grey mannequin (big round head, no face, rounded torso, stubby arms with mitten hands,
+   short legs, rounded shoes) holding a softly glowing hexagon lightstick in its right hand. Built from primitives, no external model.
+   Faces local +z; its right hand is on the -x side. Pivots at hips / shoulders / elbows / knees drive the walk cycle, idle beat bob and jump pose. */
+class CinemaMannequin {
+  constructor(color) {
+    const g = this.g = new THREE.Group(); g.name = 'cinema-mannequin'; g.userData.cinema = true; g.visible = false;
+    const skin = new THREE.MeshStandardMaterial({ color: '#cfd2d4', roughness: .6, metalness: 0, emissive: '#2b3033', emissiveIntensity: .45 });
+    const add = (parent, geo, mat, x = 0, y = 0, z = 0, sx = 1, sy = 1, sz = 1) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.scale.set(sx, sy, sz); parent.add(m); return m; };
+    const pivot = (parent, x, y, z) => { const p = new THREE.Group(); p.position.set(x, y, z); parent.add(p); return p; };
+    this.HIP = .6;
+    const rig = this.rig = pivot(g, 0, this.HIP, 0), chest = this.chest = pivot(rig, 0, 0, 0);
+    add(chest, new THREE.CapsuleGeometry(.19, .16, 8, 24), skin, 0, .25, 0, 1, 1, .8);                // rounded torso
+    add(chest, new THREE.CylinderGeometry(.075, .085, .14, 16), skin, 0, .55, 0);                      // short neck
+    this.head = pivot(chest, 0, .76, 0); add(this.head, new THREE.SphereGeometry(.26, 40, 28), skin); // big round head, no face
+    const arm = sx => {
+      const sh = pivot(chest, sx * .225, .43, 0); sh.rotation.order = 'ZXY';
+      add(sh, new THREE.CapsuleGeometry(.056, .13, 6, 14), skin, 0, -.125, 0);
+      const el = pivot(sh, 0, -.24, 0); add(el, new THREE.SphereGeometry(.053, 14, 10), skin); add(el, new THREE.CapsuleGeometry(.05, .11, 6, 14), skin, 0, -.105, 0); // elbow ball keeps the bent arm one smooth piece
+      const hand = pivot(el, 0, -.21, 0); add(hand, new THREE.SphereGeometry(1, 16, 12), skin, 0, -.06, 0, .066, .078, .056); add(hand, new THREE.SphereGeometry(.028, 10, 8), skin, -sx * .04, -.05, .035); // mitten + thumb
+      return { sh, el, hand };
+    };
+    this.armL = arm(1); this.armR = arm(-1);
+    const leg = sx => {
+      const hip = pivot(rig, sx * .095, 0, 0); add(hip, new THREE.CapsuleGeometry(.09, .2, 6, 16), skin, 0, -.19, 0);
+      const kn = pivot(hip, 0, -.34, 0); add(kn, new THREE.SphereGeometry(.085, 16, 12), skin); add(kn, new THREE.CapsuleGeometry(.082, .1, 6, 16), skin, 0, -.13, 0); // knee ball: no notch between thigh and shin
+      const an = pivot(kn, 0, -.26, 0); add(an, new THREE.SphereGeometry(1, 20, 14), skin, 0, .065, .05, .105, .07, .16); // rounded shoe on an ankle pivot (kept flat while the leg swings)
+      return { hip, kn, an };
+    };
+    this.legL = leg(1); this.legR = leg(-1);
+    // lightstick in the right hand: dark handle + flat hexagon head (+ a faint additive halo so it glows lightly)
+    const stick = this.stick = pivot(this.armR.hand, 0, -.07, 0);
+    add(stick, new THREE.CylinderGeometry(.017, .02, .26, 10), new THREE.MeshStandardMaterial({ color: '#23272b', roughness: .5, metalness: .3 }), 0, .09, 0);
+    this.headMat = new THREE.MeshBasicMaterial({ color, toneMapped: false, side: THREE.DoubleSide });
+    this.haloMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .18, toneMapped: false, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending });
+    add(stick, STICK.hand, this.headMat, 0, .27, 0, .36, .36, .36);
+    add(stick, STICK.hand, this.haloMat, 0, .27, 0, .54, .54, .54).renderOrder = 3;
+    // soft contact shadow (lives in the scene, not on the figure, so it stays on the ground while you jump)
+    const cvs = document.createElement('canvas'); cvs.width = cvs.height = 64; const cx = cvs.getContext('2d'), gr = cx.createRadialGradient(32, 32, 3, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(0,0,0,.6)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); cx.fillStyle = gr; cx.fillRect(0, 0, 64, 64);
+    this.shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(cvs), transparent: true, depthWrite: false, toneMapped: false }));
+    this.shadow.renderOrder = 2; this.shadow.visible = false;
+    this.phase = 0; this.air = 0; this.color = null; this.setColor(color);
+  }
+  setName() {}
+  setColor(c) { this.color = c; glowify(this.headMat.color.set(c), STICK_LEVEL); this.haloMat.color.copy(this.headMat.color); }
+  hide() { this.g.visible = false; this.shadow.visible = false; }
+  /* v = horizontal speed (m/s), vy = vertical speed, land = 0..1 landing squash. Uses the show beat (SHOW.b) for the idle sway. */
+  pose(dt, t, v, grounded, vy, land) {
+    const A = this.armL, B = this.armR, LL = this.legL, RL = this.legR, chest = this.chest, rig = this.rig;
+    const walkW = Math.min(1, v / 1.3), runK = clamp((v - 2.6) / 1.8, 0, 1);
+    this.phase += dt * v * 3.9; this.air += ((grounded ? 0 : 1) - this.air) * (1 - Math.exp(-16 * dt));
+    const air = this.air, gnd = 1 - air, s = Math.sin(this.phase), c = Math.cos(this.phase), amp = walkW * (.55 + .3 * runK) * gnd;
+    const wave = Math.sin(SHOW.b * Math.PI * 2), sway = Math.sin(SHOW.b * Math.PI), idle = (1 - walkW) * gnd, rise = clamp(vy / CW.JUMP, -1, 1), up = Math.max(0, rise);
+    // legs: walk cycle on the ground, tuck while rising, reach while falling
+    const kb = walkW * gnd * (.6 + .6 * runK);
+    LL.hip.rotation.x = s * amp + air * (-.35 - .45 * up); RL.hip.rotation.x = -s * amp + air * (.2 - .35 * up);
+    LL.kn.rotation.x = Math.max(0, -c) * kb + air * (.35 + .6 * up); RL.kn.rotation.x = Math.max(0, c) * kb + air * (.45 - .15 * up);
+    LL.an.rotation.x = -(LL.hip.rotation.x + LL.kn.rotation.x) * .85; RL.an.rotation.x = -(RL.hip.rotation.x + RL.kn.rotation.x) * .85;
+    // left arm swings against the legs (both go overhead in a jump); right arm keeps the lightstick up and waves it on the beat
+    A.sh.rotation.x = -s * amp * .95 + air * (-2.5 - .3 * Math.max(0, -rise)); A.sh.rotation.z = .14 + .12 * walkW + air * .3;
+    A.el.rotation.x = -(.1 + (.18 + .55 * runK) * walkW * gnd) + air * -.25;
+    const bw = .4 + idle * .6;
+    B.sh.rotation.x = -1.05 - air * 1.2 + wave * .15 * bw + s * amp * .1; B.sh.rotation.z = -.12 - air * .2;
+    B.el.rotation.x = -1.1 + air * .3 + wave * .18 * bw;
+    this.stick.rotation.set(-(B.sh.rotation.x + B.el.rotation.x) + .18 + wave * .1 * (1 - air * .5), 0, -B.sh.rotation.z + sway * .12);
+    // torso: lean into the run, counter-twist, breathe, bob on the beat, squash on landing
+    chest.rotation.x = (.05 + .06 * walkW + .1 * runK) * gnd + air * .12; chest.rotation.y = -s * .12 * walkW * gnd; chest.rotation.z = sway * .035 * idle;
+    rig.position.y = this.HIP + Math.abs(s) * .035 * walkW * gnd + SHOW.pulse * .016 * idle - land * .1;
+    const br = 1 + Math.sin(t * 1.7) * .012 * idle; chest.scale.set(1 + land * .05, br * (1 - land * .06), 1 + land * .05);
+    this.head.rotation.x = SHOW.pulse * .06 * idle - .04 * walkW; this.head.rotation.y = Math.sin(t * .7) * .12 * idle;
+  }
+}
+
+/* Chairs as oriented boxes in a coarse grid: each frame only the seats within about a metre are looked at (never all 600+). Seat-local axes: -z faces the stage. */
+const CHAIR_PARTS = [{ x0: -.34, x1: .34, z0: -.25, z1: .29, h: .51 }, { x0: -.3, x1: .3, z0: .19, z1: .295, h: 1.18 }]; // [0] seat block (cushion + arms), [1] backrest strip
+const CHAIR = (() => {
+  const cell = 1.5; let x0 = 1e9, x1 = -1e9, z0 = 1e9, z1 = -1e9;
+  for (const s of SEATS) { x0 = Math.min(x0, s.x); x1 = Math.max(x1, s.x); z0 = Math.min(z0, s.z); z1 = Math.max(z1, s.z); }
+  x0 -= 2; z0 -= 2; const nx = Math.ceil((x1 + 2 - x0) / cell) + 1, nz = Math.ceil((z1 + 2 - z0) / cell) + 1, grid = Array.from({ length: nx * nz }, () => []);
+  for (const s of SEATS) grid[Math.floor((s.z - z0) / cell) * nx + Math.floor((s.x - x0) / cell)].push({ x: s.x, y: s.y, z: s.z, c: Math.cos(s.yaw), sn: Math.sin(s.yaw) });
+  return { cell, x0, z0, nx, nz, grid, near: [] };
+})();
+function chairsNear(x, z) {
+  const out = CHAIR.near, ci = Math.floor((x - CHAIR.x0) / CHAIR.cell), cj = Math.floor((z - CHAIR.z0) / CHAIR.cell); out.length = 0;
+  for (let j = cj - 1; j <= cj + 1; j++) { if (j < 0 || j >= CHAIR.nz) continue; for (let i = ci - 1; i <= ci + 1; i++) { if (i < 0 || i >= CHAIR.nx) continue; const cell = CHAIR.grid[j * CHAIR.nx + i]; for (let k = 0; k < cell.length; k++) out.push(cell[k]); } }
+  return out;
+}
+/* Push the walker (circle of radius CW.R) out of every chair part whose top is higher than feet + STEP; lower parts can be stepped onto. */
+function cinemaChairPush(p, feet) {
+  const list = chairsNear(p.x, p.z), r = CW.R;
+  for (let it = 0; it < 3; it++) {
+    let moved = false;
+    for (let k = 0; k < list.length; k++) {
+      const s = list[k];
+      for (let q = 0; q < 2; q++) {
+        const part = CHAIR_PARTS[q]; if (s.y + part.h <= feet + CW.STEP) continue;
+        const dx = p.x - s.x, dz = p.z - s.z; if (dx * dx + dz * dz > .5) break;
+        const lx = dx * s.c - dz * s.sn, lz = dx * s.sn + dz * s.c, ox = lx - clamp(lx, part.x0, part.x1), oz = lz - clamp(lz, part.z0, part.z1), d2 = ox * ox + oz * oz;
+        if (d2 >= r * r) continue;
+        let nx, nz, push;
+        if (d2 > 1e-9) { const d = Math.sqrt(d2); nx = ox / d; nz = oz / d; push = r - d; }
+        else { const a = lx - part.x0, b = part.x1 - lx, c = lz - part.z0, e = part.z1 - lz, m = Math.min(a, b, c, e); if (m === a) { nx = -1; nz = 0; } else if (m === b) { nx = 1; nz = 0; } else if (m === c) { nx = 0; nz = -1; } else { nx = 0; nz = 1; } push = m + r; }
+        p.x += (nx * s.c + nz * s.sn) * push; p.z += (-nx * s.sn + nz * s.c) * push; moved = true;
+      }
+    }
+    if (!moved) break;
+  }
+}
+/* Highest chair top under the feet that is within step range of them (so landing from a jump, or walking along a row of cushions, works). */
+function cinemaChairTop(x, z, feet) {
+  const list = chairsNear(x, z), r = CW.RS, lim = feet + CW.STEP; let best = -1e9;
+  for (let k = 0; k < list.length; k++) {
+    const s = list[k], dx = x - s.x, dz = z - s.z; if (dx * dx + dz * dz > .5) continue;
+    const lx = dx * s.c - dz * s.sn, lz = dx * s.sn + dz * s.c;
+    for (let q = 0; q < 2; q++) { const part = CHAIR_PARTS[q], top = s.y + part.h; if (top > lim || top <= best) continue; const ox = lx - clamp(lx, part.x0, part.x1), oz = lz - clamp(lz, part.z0, part.z1); if (ox * ox + oz * oz < r * r) best = top; }
+  }
+  return best;
+}
+const cinemaGroundTop = (x, z, feet) => Math.max(cinemaGroundY(x, z), cinemaChairTop(x, z, feet));
+/* Keep the walker inside the sphere room (margin from the LED wall at the current height) and in front of the back wall of the rake. */
+function cinemaClampRoom(p, feet) {
+  const C = VEN.C, dy = C.y - feet, lim2 = (VEN.R - .5) * (VEN.R - .5) - dy * dy, lim = lim2 > 0 ? Math.sqrt(lim2) : 0, dx = p.x - C.x, dz = p.z - C.z, rr = Math.hypot(dx, dz);
+  if (rr > lim) { p.x = C.x + dx * lim / rr; p.z = C.z + dz * lim / rr; }
+  const L = LEVELS[0], rb = L.r0 + (L.rows - .5) * L.depth - CW.R - .02, fx = p.x - VEN.F.x, fz = p.z - VEN.F.z, rf = Math.hypot(fx, fz);
+  if (rf > rb && Math.abs(Math.atan2(fx, fz)) < L.span) { p.x = VEN.F.x + fx * rb / rf; p.z = VEN.F.z + fz * rb / rf; }
+}
+/* One horizontal sub-step: move, let a riser taller than a step stop you, push out of the chairs, keep inside the room. */
+function cinemaMoveXZ(p, sx, sz, feet) {
+  const ox = p.x, oz = p.z, wall = feet + CW.STEP_UP; p.x += sx; p.z += sz;
+  if (cinemaGroundY(p.x, p.z) > wall) { if (cinemaGroundY(p.x, oz) <= wall) p.z = oz; else if (cinemaGroundY(ox, p.z) <= wall) p.x = ox; else { p.x = ox; p.z = oz; } } // a riser taller than a step stops you
+  cinemaChairPush(p, feet); cinemaClampRoom(p, feet);
+}
+/* Boxed in? True when a short step in every one of 8 directions is cancelled by chairs, risers or the room edge. */
+function cinemaBoxedIn(p, feet) {
+  for (let a = 0; a < 8; a++) { _cwQ.copy(p); cinemaMoveXZ(_cwQ, Math.cos(a * Math.PI / 4) * .14, Math.sin(a * Math.PI / 4) * .14, feet); if (Math.hypot(_cwQ.x - p.x, _cwQ.z - p.z) > .07) return false; }
+  return true;
+}
+/* Walker frame: keyboard + touch joystick (camera-relative) give a heading; the physics then runs in slices of at most CW.SLICE seconds, so walking speed, jumps and
+   collisions behave the same at 10 fps or 144 fps (dt is the real frame time, not the capped one). */
+function updateCinemaWalker(dt) {
+  const M = cinemaMove, P = cv.walkPos; dt = Math.max(dt, .001);
+  let fw = 0, st = 0;
+  if (keyHeld('w') || keyHeld('arrowup')) fw += 1; if (keyHeld('s') || keyHeld('arrowdown')) fw -= 1;
+  if (keyHeld('d') || keyHeld('arrowright')) st += 1; if (keyHeld('a') || keyHeld('arrowleft')) st -= 1;
+  const run = keyHeld('shift'); keyPend.clear(); // a tap that was over before this frame has now been counted
+  fw -= joyV.y; st += joyV.x;
+  let mag = Math.hypot(fw, st); if (mag > 1) { fw /= mag; st /= mag; mag = 1; } if (mag < .08) { fw = st = mag = 0; }
+  const sy = Math.sin(cv.walkYaw), cy = Math.cos(cv.walkYaw), wx = -sy * fw + cy * st, wz = -cy * fw - sy * st; // heading follows the camera: W = away from the camera
+  if (mag && !walkHint.done) hideWalkHint(true); // you found the controls
+  const n = Math.max(1, Math.ceil(dt / CW.SLICE)), h = dt / n;
+  for (let i = 0; i < n; i++) cinemaWalkSlice(h, wx, wz, mag, run);
+  const sp = Math.hypot(M.vx, M.vz); M.speed += (sp - M.speed) * (1 - Math.exp(-12 * dt));
+  // turn the body towards where you are heading (first person: towards where you look)
+  let want = M.face;
+  if (cv.person === 'first') want = cv.walkYaw + Math.PI; else if (mag) want = Math.atan2(wx, wz); else if (sp > .3) want = Math.atan2(M.vx, M.vz);
+  M.face += Math.atan2(Math.sin(want - M.face), Math.cos(want - M.face)) * (1 - Math.exp(-14 * dt));
+  if (M.grounded) { const d = M.feet - M.vis; M.vis = Math.abs(d) > .9 ? M.feet : M.vis + d * (1 - Math.exp(-22 * dt)); } else M.vis = M.feet; // smooth the visual height over steps
+  M.under = cinemaGroundTop(P.x, P.z, M.feet + .05);
+  // safety net: still pushing but boxed in on every side (never seen in testing), or somehow outside the room: put the walker back on open floor
+  if (mag > .3 && M.grounded && sp < .2) M.stuck += dt; else M.stuck = 0;
+  const lost = !(Math.abs(P.x) + Math.abs(P.z) + Math.abs(M.feet) < 1e4) || M.feet < -3;
+  if (lost || M.stuck > 1.2) { M.stuck = 0; if (lost || cinemaBoxedIn(P, M.feet)) cinemaUnstick(); }
+  if (me) { me.pos.x = P.x; me.pos.z = P.z; me.rot = M.face; }
+  syncCinemaAvatars(dt, performance.now(), clock.elapsedTime);
+}
+/* One slice of walker physics: accelerate, move + collide, jump, gravity, land / step. h is in seconds (at most CW.SLICE). */
+function cinemaWalkSlice(h, wx, wz, mag, run) {
+  const M = cinemaMove, P = cv.walkPos;
+  const top = (run || (isTouch && mag > .95) ? CW.RUN : CW.WALK) * mag;
+  const k = 1 - Math.exp(-(mag ? (M.grounded ? 11 : 3.2) : (M.grounded ? 13 : .9)) * h); // smooth speed-up / slow-down, weaker steering in the air
+  M.vx += (wx * top - M.vx) * k; M.vz += (wz * top - M.vz) * k;
+  // horizontal move in small sub-steps so nothing can be tunnelled; then push out of chairs and keep inside the room
+  const x0 = P.x, z0 = P.z, n = Math.max(1, Math.ceil(Math.hypot(M.vx, M.vz) * h / .08)), sx = M.vx * h / n, sz = M.vz * h / n;
+  for (let i = 0; i < n; i++) cinemaMoveXZ(P, sx, sz, M.feet);
+  M.vx = (P.x - x0) / h; M.vz = (P.z - z0) / h; // blocked? then you are not moving that way any more
+  // vertical: jump (with a little coyote time and input buffering), gravity, landing on rake treads / chair tops, mantling small ledges
+  M.coyote = M.grounded ? .1 : Math.max(0, M.coyote - h); M.buf = Math.max(0, M.buf - h);
+  if (M.buf > 0 && M.coyote > 0) { M.vy = CW.JUMP; M.grounded = false; M.coyote = 0; M.buf = 0; cv.walkJumpT = performance.now(); }
+  if (M.grounded) {
+    const g = cinemaGroundTop(P.x, P.z, M.feet);
+    if (M.feet - g > CW.STEP_DOWN) { M.grounded = false; M.vy = 0; } else M.feet = g; // small steps up/down are walked; bigger drops are falls
+  } else {
+    const prev = M.feet; M.vy -= CW.G * h; const nf = prev + M.vy * h;
+    if (M.vy <= 0) { const g = cinemaGroundTop(P.x, P.z, prev); if (nf <= g) { M.land = Math.max(M.land, clamp(-M.vy / 11, 0, 1)); M.feet = g; M.vy = 0; M.grounded = true; } else M.feet = nf; }
+    else { const g = cinemaGroundTop(P.x, P.z, nf); if (g > nf) { M.feet = g; M.vy = 0; M.grounded = true; } else M.feet = nf; } // rising into a chair top within step range: hop up onto it
+  }
+  cinemaClampRoom(P, M.feet); // the room is narrower lower down: re-check after dropping from a chair top
+  M.land *= Math.exp(-9 * h);
+  P.y = M.feet;
+}
+/* Open standing ground: level all round (no riser underfoot), inside the room with a margin, and `clear` metres from every chair part that would stop you (the rake is
+   wall to wall chairs with only a 0.37 m tread between rows, so this is the front floor, the side walkways and any aisle gap). */
+const OPEN_OFFS = [[.45, 0], [-.45, 0], [0, .45], [0, -.45], [.32, .32], [-.32, .32], [.32, -.32], [-.32, -.32]];
+function cinemaChairNear(x, z, feet, clear) { // is a chair part that would stop a walker standing at `feet` within `clear` metres of (x, z)?
+  const list = chairsNear(x, z), c2 = clear * clear;
+  for (let k = 0; k < list.length; k++) {
+    const s = list[k];
+    for (let q = 0; q < 2; q++) {
+      const part = CHAIR_PARTS[q]; if (s.y + part.h <= feet + CW.STEP) continue;
+      const dx = x - s.x, dz = z - s.z, lx = dx * s.c - dz * s.sn, lz = dx * s.sn + dz * s.c, ox = lx - clamp(lx, part.x0, part.x1), oz = lz - clamp(lz, part.z0, part.z1);
+      if (ox * ox + oz * oz < c2) return true;
+    }
+  }
+  return false;
+}
+/* `run` = how far straight ahead (towards the stage, the way W will go) must also be walkable: inside the room, no riser too tall to step, no chair in the way.
+   `lev` scales the level-ground / room-margin probe (1 = roomy floor; .5 = one rake tread, e.g. a side walkway step). */
+function cinemaOpen(x, z, clear, run, lev = 1) {
+  const f = cinemaGroundY(x, z);
+  for (let i = 0; i < 8; i++) if (Math.abs(cinemaGroundY(x + OPEN_OFFS[i][0] * lev, z + OPEN_OFFS[i][1] * lev) - f) > .01) return false;
+  const m = lev < 1 ? lev : 1.4;
+  for (let i = 0; i < 8; i++) { const px = x + OPEN_OFFS[i][0] * m, pz = z + OPEN_OFFS[i][1] * m; _cwQ.set(px, 0, pz); cinemaClampRoom(_cwQ, f); if (Math.hypot(_cwQ.x - px, _cwQ.z - pz) > .01) return false; } // room margin all round
+  if (cinemaChairNear(x, z, f, clear)) return false;
+  return !(run > 0) || cinemaRunClear(x, z, f, Math.atan2(x - VEN.F.x, z - VEN.F.z), run);
+}
+/* Can the walker go `run` metres straight from (x, z) (feet f) the way W goes when the camera yaw is `yaw`: no riser too tall, inside the room, no chair in the way. */
+function cinemaRunClear(x, z, f, yaw, run) {
+  const fx = -Math.sin(yaw), fz = -Math.cos(yaw);
+  for (let d = .25; d <= run + 1e-6; d += .25) {
+    const px = x + fx * d, pz = z + fz * d, g = cinemaGroundY(px, pz); if (g > f + CW.STEP_UP) return false;
+    _cwQ.set(px, 0, pz); cinemaClampRoom(_cwQ, g); if (Math.hypot(_cwQ.x - px, _cwQ.z - pz) > .01) return false;
+    if (cinemaChairNear(px, pz, g, CW.R + .05)) return false; f = Math.min(f, g);
+  }
+  return true;
+}
+/* Nearest open standing spot to (ox, oz): rings of growing radius, so the first hit is (within 0.25 m) the closest. Strict about room first, then relaxed. Returns null only if the whole room has none. */
+function cinemaFindOpenSpot(ox, oz) {
+  for (const [clear, run] of [[1, 1.5], [.6, 1.5], [.45, 1], [.3, 0]]) {
+    for (let r = 0; r <= 26; r += .25) {
+      const steps = r < .01 ? 1 : Math.max(8, Math.ceil(Math.PI * 2 * r / .25));
+      for (let i = 0; i < steps; i++) { const a = i / steps * Math.PI * 2, x = ox + Math.sin(a) * r, z = oz + Math.cos(a) * r; if (cinemaOpen(x, z, clear, run)) return { x, z, y: cinemaGroundY(x, z) }; }
+    }
+  }
+  return null;
+}
+/* Nearest spot to a seat where the walker can stand AND walk straight off with W: nearest-first rings (0.2 m apart, up to maxR), each spot one tread deep and a body
+   width clear of every chair, with 1.5 m walkable on a heading as close to the stage as possible (within 60 deg: down a side walkway the stage is off to one side).
+   In the rake this is the row's own side walkway (or a step of it); for the front rows, the floor in front of row A. Returns { x, y, z, yaw } or null. */
+const SPAWN_FAN = [0, .35, -.35, .7, -.7, 1.05, -1.05];
+function cinemaFindSpawnSpot(ox, oz, maxR) {
+  for (let r = 0; r <= maxR; r += .2) {
+    const steps = r < .01 ? 1 : Math.max(8, Math.ceil(Math.PI * 2 * r / .2));
+    for (let i = 0; i < steps; i++) {
+      const a = i / steps * Math.PI * 2, x = ox + Math.sin(a) * r, z = oz + Math.cos(a) * r; if (!cinemaOpen(x, z, CW.R + .12, 0, .5)) continue;
+      const y = cinemaGroundY(x, z), toStage = Math.atan2(x - VEN.F.x, z - VEN.F.z);
+      for (const o of SPAWN_FAN) if (cinemaRunClear(x, z, y, toStage + o, 1.5)) return { x, y, z, yaw: toStage + o };
+    }
+  }
+  return null;
+}
+/* Put the walker down (standing, still) at x,z,y facing the stage (or along `yaw` when given) with the camera behind. */
+function cinemaPlaceWalker(x, y, z, yaw) {
+  const M = cinemaMove, P = cv.walkPos, a = yaw ?? Math.atan2(x - VEN.F.x, z - VEN.F.z); // heading to the stage = along the line from here to the focal point
+  P.set(x, y, z); M.vx = M.vz = M.vy = 0; M.speed = 0; M.grounded = true; M.feet = M.vis = M.under = y; M.land = 0; M.buf = 0; M.coyote = 0; M.stuck = 0;
+  M.face = a + Math.PI; cv.walkYaw = a; cv.walkPitch = rad(8);
+}
+/* Place the walker at the chosen seat: standing on the nearest walkable ground to it (the row's side walkway, or the floor in front of row A for the front rows),
+   facing the stage (or down the walkway) so W works at once. Only if nothing is within 20 m: the roomiest open floor; failing even that, the seat cushion. */
+function spawnCinemaWalker(seat) {
+  const M = cinemaMove, spot = cinemaFindSpawnSpot(seat.x, seat.z, 20) || cinemaFindOpenSpot(seat.x, seat.z);
+  if (spot) cinemaPlaceWalker(spot.x, spot.y, spot.z, spot.yaw); else { cinemaPlaceWalker(seat.x - Math.sin(seat.yaw) * .03, seat.y + CHAIR_PARTS[0].h, seat.z - Math.cos(seat.yaw) * .03); cv.walkYaw = seat.yaw; M.face = seat.yaw + Math.PI; }
+  M.seat = seat; // W walks straight off from here (the heading was checked to be clear for 1.5 m)
+}
+/* Safety net for the walker: back onto the nearest open ground to where it is now. */
+function cinemaUnstick() {
+  const P = cv.walkPos, ok = Math.abs(P.x) + Math.abs(P.z) < 1e4, spot = cinemaFindOpenSpot(ok ? P.x : VEN.F.x, ok ? P.z : VEN.F.z + 6), seat = cinemaMove.seat;
+  if (spot) { const yaw = cv.walkYaw; cinemaPlaceWalker(spot.x, spot.y, spot.z); cv.walkYaw = yaw; cinemaMove.face = yaw + Math.PI; }
+  else if (seat) spawnCinemaWalker(seat);
+  if (typeof toast === 'function') toast('Back on the floor');
+}
+/* Third-person camera: behind and above, smooth follow; marched along the ray so it pulls in instead of passing through chair backs, the rake or the sphere wall. */
+function cinemaCamBlocked(x, y, z) {
+  const C = VEN.C, dx = x - C.x, dy = y - C.y, dz = z - C.z; if (dx * dx + dy * dy + dz * dz > (VEN.R - .6) * (VEN.R - .6)) return true;
+  if (y < cinemaGroundY(x, z) + .22) return true;
+  const L = LEVELS[0], fx = x - VEN.F.x, fz = z - VEN.F.z, rb = L.r0 + (L.rows - .5) * L.depth - .12;
+  if (fx * fx + fz * fz > rb * rb && Math.abs(Math.atan2(fx, fz)) < L.span && y < (L.y0 ?? .55) + (L.rows - 1) * L.rise + 1.5) return true;
+  const list = chairsNear(x, z);
+  for (let k = 0; k < list.length; k++) {
+    const s = list[k], ex = x - s.x, ez = z - s.z; if (ex * ex + ez * ez > .9) continue;
+    const lx = ex * s.c - ez * s.sn, lz = ex * s.sn + ez * s.c;
+    for (let q = 0; q < 2; q++) { const p = CHAIR_PARTS[q]; if (y < s.y + p.h + .14 && lx > p.x0 - .14 && lx < p.x1 + .14 && lz > p.z0 - .14 && lz < p.z1 + .14) return true; }
+  }
+  return false;
+}
+function cinemaCamClip(pv, dir, D) {
+  const n = 12;
+  for (let i = 1; i <= n; i++) { const t = D * i / n; if (cinemaCamBlocked(pv.x + dir.x * t, pv.y + dir.y * t, pv.z + dir.z * t)) return Math.max(CW.CAM_MIN, D * (i - 1) / n - .06); }
+  return D;
+}
+function cinemaWalkCameraStart() { const M = cinemaMove, P = cv.walkPos; M.blend = 0; M.camFrom.copy(cineCam.position); M.blendDur = clamp(cineCam.position.distanceTo(P) / 18, .55, 1.1); /* a longer glide when the figure stands further from where the camera was */ M.person = cv.person; M.camDist = CW.CAM; M.lift = 0; M.piv.set(P.x, M.vis + 1.25, P.z); }
+function cinemaWalkCamera(dt) {
+  const M = cinemaMove, P = cv.walkPos, yaw = cv.walkYaw;
+  if (seatMesh.material.opacity !== 1) { seatMesh.material.transparent = false; seatMesh.material.opacity = 1; } // undo the seat view's dolly fade
+  cineCam.up.set(0, 1, 0);
+  M.piv.lerp(_cwT.set(P.x, M.vis + 1.25, P.z), 1 - Math.exp(-18 * dt));
+  if (cv.person === 'first') {
+    _cwP.set(P.x, M.vis + CW.EYE, P.z); const cp = Math.cos(cv.walkPitch);
+    _ct.set(_cwP.x - Math.sin(yaw) * cp * 10, _cwP.y + Math.sin(cv.walkPitch) * 10, _cwP.z - Math.cos(yaw) * cp * 10);
+  } else {
+    const p = clamp(cv.walkPitch - rad(18), rad(-50), rad(20)); let want = 0, best = -1;
+    for (const lift of [0, .15, .3, .45, .6, .8]) { // if the rows behind would hide the figure, climb higher (look more steeply down) until the view is clear
+      _cwD.set(Math.sin(yaw) * Math.cos(Math.max(rad(-80), p - lift)), -Math.sin(Math.max(rad(-80), p - lift)), Math.cos(yaw) * Math.cos(Math.max(rad(-80), p - lift)));
+      const a = cinemaCamClip(M.piv, _cwD, CW.CAM); if (a > best) { best = a; want = lift; } if (a >= CW.CAM * .85) { want = lift; break; }
+    }
+    M.lift += (want - M.lift) * (1 - Math.exp(-5 * dt));
+    const pe = Math.max(rad(-80), p - M.lift); _cwD.set(Math.sin(yaw) * Math.cos(pe), -Math.sin(pe), Math.cos(yaw) * Math.cos(pe));
+    const allow = cinemaCamClip(M.piv, _cwD, CW.CAM);
+    M.camDist = allow < M.camDist ? allow : M.camDist + (allow - M.camDist) * (1 - Math.exp(-2.5 * dt)); // pulls in at once when blocked, eases back out
+    _cwP.copy(M.piv).addScaledVector(_cwD, M.camDist); _ct.set(M.piv.x, M.piv.y + .22, M.piv.z);
+  }
+  if (M.blend < 1) { M.blend = Math.min(1, M.blend + dt / (M.blendDur || .55)); cineCam.position.lerpVectors(M.camFrom, _cwP, M.blend * M.blend * (3 - 2 * M.blend)); } else cineCam.position.copy(_cwP);
+  cineCam.lookAt(_ct);
+  const fov = isTouch ? 70 : 60; if (cineCam.fov !== fov) { cineCam.fov = fov; cineCam.updateProjectionMatrix(); }
+}
+function cinemaGroundY(x, z) {
+  const L = LEVELS[0]; if (!L) return 0;
+  const dx = x - VEN.F.x, dz = z - VEN.F.z, r = Math.hypot(dx, dz), a = Math.abs(Math.atan2(dx, dz));
+  if (a <= L.span && r >= L.r0 - L.depth * .5 && r <= L.r0 + (L.rows - .5) * L.depth) return (L.y0 ?? .55) + clamp(Math.floor((r - L.r0 + L.depth * .5) / L.depth), 0, L.rows - 1) * L.rise;
+  return 0;
+}
+function ensureCinemaAvatar() { // the local cinema walker is the procedural mannequin (peers still use the Avatar class)
+  if (!cinemaWalkers.local) cinemaWalkers.local = new CinemaMannequin(stickColor);
+  if (cinemaWalkers.local.color !== stickColor) cinemaWalkers.local.setColor(stickColor);
+  return cinemaWalkers.local;
+}
+function cinemaPeerSpot(av) {
+  const x = VEN.F.x + clamp(av.pos.x / 52, -.78, .78) * 10.4;
+  const z = VEN.F.z + clamp((av.pos.z + 8) / 48, -1, 1) * 11.5;
+  return { x, z };
+}
+function syncCinemaAvatars(dt, now, t) {
+  const local = ensureCinemaAvatar(), M = cinemaMove, P = cv.walkPos, show = cv.person !== 'first';
+  if (local.g.parent !== cineScene) cineScene.add(local.g, local.shadow);
+  local.g.visible = show; local.shadow.visible = show; // hidden in first person
+  local.g.position.set(P.x, M.vis, P.z); local.g.rotation.y = M.face;
+  const lift = clamp((M.feet - M.under) / 2.5, 0, .7); local.shadow.position.set(P.x, M.under + .02, P.z); local.shadow.scale.setScalar(.95 * (1 - lift)); local.shadow.material.opacity = 1 - lift;
+  local.pose(dt, t, M.speed, M.grounded, M.vy, M.land);
+  for (const p of peers.values()) {
+    const spot = cinemaPeerSpot(p.av); p.av.g.userData.cinema = true;
+    if (p.av.g.parent !== cineScene) cineScene.add(p.av.g);
+    p.av.target.set(spot.x, 0, spot.z); p.av.pos.set(spot.x, 0, spot.z);
+    p.av.update(dt, now, t);
+    p.av.g.position.set(spot.x, cinemaGroundY(spot.x, spot.z), spot.z);
+    p.av.g.rotation.y = p.av.targetRot;
+    p.av.g.visible = true;
+  }
+}
+function setCinemaPerson(mode) { cv.person = mode === 'first' ? 'first' : 'third'; if (cv.mode === 'walk') { const local = ensureCinemaAvatar(); local.g.visible = cv.person !== 'first'; } setCineView('walk'); }
+function cinemaJump() { cinemaMove.buf = .14; } // Space / Jump button: queued for a moment so a slightly early press still jumps; the physics step does the jump
 /* ---------- the room follows the show ---------- */
 const _hc = new THREE.Color(), _amb = new THREE.Color();
 let lastVib = -1, vibOn = false;
@@ -7741,9 +8205,7 @@ function updateCinema(dt) {
   cineKey.color.copy(_amb).lerp(WHITE, 0.12); cineKey.intensity = (0.38 + SHOW.pulse * 0.32) * (cut ? 3 : 1);
   cutLight.intensity = cut ? 2.4 : 0; cutAmb.intensity = cut ? 0.9 : 0; const plaza = cineScene.getObjectByName('plaza'); if (plaza) plaza.visible = cut || cv.mode === 'tour';
   shellMat.uniforms.uCol.value.copy(pal[0]); shellMat.uniforms.uCol2.value.copy(pal[2 % pal.length]);
-  cineStickU.uBeat.value = SHOW.b; cineStickU.uCol.value.copy(pal[0]).multiplyScalar(1.2); cineStickU.uCol2.value.copy(pal[1 % pal.length]).multiplyScalar(1.2);
-  cineStickU.uPat.value = cue.chase ? 1 : 0; cineStickU.uPx.value = renderer.getPixelRatio() * innerHeight / 900;
-  updateSeatedAudience(dt, performance.now(), SHOW.b + SHOW.frac);
+  updateSeatedAudience(dt, performance.now(), SHOW.b);
   hapticMat.color.setScalar(0.25 + 1.6 * SHOW.pulse);
   techG.visible = $('#techBtn').classList.contains('on');
   if (vibOn && cv.mode === 'seat' && cv.seat && TIERS[cv.seat.tier].haptic && navigator.vibrate && SHOW.beat !== lastVib) { lastVib = SHOW.beat; navigator.vibrate(TIERS[cv.seat.tier].haptic === 2 ? 28 : 16); }
@@ -7797,6 +8259,7 @@ function buildHaloMap() {
 }
 buildHaloMap();
 document.querySelectorAll('#cv button[data-v]').forEach(b => b.addEventListener('click', () => setCineView(b.dataset.v)));
+document.querySelectorAll('#cineViewModes [data-person]').forEach(b => b.addEventListener('click', () => setCinemaPerson(b.dataset.person)));
 $('#seatsBtn').addEventListener('click', () => { $('#picker').hidden = !$('#picker').hidden; });
 $('#pickClose').addEventListener('click', () => { $('#picker').hidden = true; });
 $('#bestBtn').addEventListener('click', () => { const s = SEATS.filter(q => q.tier === 'zenith').sort((a, b) => a.eye.distanceTo(VEN.C) - b.eye.distanceTo(VEN.C))[0]; pickHaloSeat(s); $('#picker').hidden = true; });
@@ -7817,7 +8280,8 @@ buildIdols(); // performers on stage, seen through the broadcast
 setView('live');
 applyHash();
 function loop() {
-  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime, now = performance.now();
+  const rawDt = clock.getDelta(), dt = Math.min(rawDt, 0.05), t = clock.elapsedTime, now = performance.now();
+  cineWalkDt = Math.min(rawDt, 0.25); // the walker uses real time (stepped in small slices), so walking is not slow-motion on a slow machine
   frame++;
   updateShowClock();
   // the KSPO arena keeps performing for the broadcast cameras; it only needs updating while the broadcast frame is up
@@ -7889,13 +8353,21 @@ function rideSeatOptions() {
 }
 function renderRideSeatMap() {
   const root = $('#ride-seat-map'); if (!root) return;
-  const active = root.dataset.tier || 'all';
-  root.innerHTML = Array.from({ length: 18 }, (_, r) => {
-    const row = SEATS.filter(s => s.row === r && (active === 'all' || s.tier === active));
-    return `<div class="ride-seat-row" style="--seat-count:${row.length}"><b>${'ABCDEFGHIJKLMNOPQR'[r]}</b>${row.map(s => `<button class="ride-seat ${s.filled ? 'taken' : ''} ${ride.selected === s ? 'selected' : ''}" style="--seat:${TIERS[s.tier].col};" title="${s.label} · ${TIERS[s.tier].name} · $${TIERS[s.tier].price}" data-seat="${SEATS.indexOf(s)}" ${s.filled ? 'disabled' : ''}></button>`).join('')}</div>`;
+  const active = root.dataset.tier || ride.seatTier || 'all';
+  /* A visualisation, not a floor plan: every row lands on one shared grid (same column count, one empty centre aisle),
+     so columns line up and each row stays centred. Seats keep their left-to-right order; the tier filter dims, never removes. */
+  const rows = Array.from({ length: 18 }, (_, r) => SEATS.filter(s => s.row === r).sort((a, b) => a.yaw - b.yaw));
+  const half = Math.ceil(Math.max(1, ...rows.map(row => row.length)) / 2);
+  root.style.setProperty('--cols', half * 2 + 1);
+  root.innerHTML = rows.map((row, r) => {
+    const left = Math.ceil(row.length / 2);
+    return `<div class="ride-seat-row"><b>${'ABCDEFGHIJKLMNOPQR'[r]}</b>${row.map((s, i) => {
+      const col = 2 + (i < left ? half - left + i : half + 1 + i - left), dim = active !== 'all' && s.tier !== active;
+      return `<button class="ride-seat ${s.filled ? 'taken' : ''} ${dim ? 'dim' : ''} ${ride.selected === s ? 'selected' : ''}" style="--seat:${TIERS[s.tier].col};grid-column:${col}" title="${s.label} · ${TIERS[s.tier].name} · $${TIERS[s.tier].price}" data-seat="${SEATS.indexOf(s)}" ${s.filled || dim ? 'disabled' : ''}></button>`;
+    }).join('')}</div>`;
   }).join('');
-  root.querySelectorAll('[data-seat]').forEach(b => b.addEventListener('click', () => { const s = SEATS[+b.dataset.seat]; if (!s?.filled) { ride.selected = s; pickHaloSeat(s); renderRide(); } }));
-  root.parentElement.querySelectorAll('[data-tier]').forEach(b => { b.classList.toggle('on', b.dataset.tier === active); b.onclick = () => { root.dataset.tier = b.dataset.tier; renderRideSeatMap(); }; });
+  // seat clicks are handled once by the delegated #ride listener (a per-button listener here made every pick fire twice)
+  root.parentElement.querySelectorAll('[data-tier]').forEach(b => { b.classList.toggle('on', b.dataset.tier === active); b.onclick = () => { ride.seatTier = root.dataset.tier = b.dataset.tier; renderRideSeatMap(); }; });
 }
 
 function rideStartShow() {
@@ -7911,7 +8383,7 @@ function rideStartShow() {
   renderRide();
 }
 function rideSkipCue() { if (!ride.started) return; const e = rideShowElapsed(), next = (Math.floor(e / RIDE_CUE_SECONDS) + 1) * RIDE_CUE_SECONDS; if (next >= SHOW_PLAN.length * RIDE_CUE_SECONDS) return rideFinishShow(); rideShowOffset += next - e + 0.05; updateShowHud(); }
-function rideFinishShow() { ride.watched = Math.min(420, rideShowElapsed()); ride.ended = true; ride.step = 7; ride.started = false; rideShowStarted = 0; renderRide(); }
+function rideFinishShow() { ride.watched = Math.min(420, rideShowElapsed()); ride.ended = true; ride.step = 7; ride.started = false; rideShowStarted = 0; if (ride.walking) { ride.walking = false; setCineView('seat'); } renderRide(); }
 function ridePairColor(c) { ride.color = c; stickColor = c; store.set('exo-color', c); glowify(baseCol.set(c), STICK_LEVEL); sticksDirty = true; if (me) me.setColor(c); ride.paired = true; renderRide(); }
 function rideFormatTime(sec) { const m = Math.floor(sec / 60); const s = String(Math.floor(sec % 60)).padStart(2, '0'); return `${m}:${s}`; }
 function rideShowElapsed() { return ride.started ? Math.max(0, (performance.now() - rideShowStarted) / 1000 + rideShowOffset) : 0; }
@@ -7919,7 +8391,8 @@ function rideSheet(html, cls = '') { return `<div class="sheet ${cls}">${html}</
 function renderRide() {
   const root = $('#ride'); if (!root || ride.shot) { if (root) root.hidden = true; return; }
   root.hidden = false;
-  root.classList.toggle('seatmap-open', ride.step === 2);
+  const walking = ride.walking && cv.mode === 'walk'; // "Look around the cinema": the step sheet makes way for a small walk bar with a way back
+  root.classList.toggle('seatmap-open', ride.step === 2 && !walking);
   const tier = rideTier(), seat = ride.selected || cv.seat, elapsed = ride.started ? rideShowElapsed() : (ride.watched || 0), plan = SHOW_PLAN[SHOW.cueIdx] || SHOW_PLAN[0];
   const dots = Array.from({ length: 8 }, (_, i) => `<i class="${i + 1 === ride.step ? 'on' : ''}"></i>`).join('');
   const chrome = `<div class="brand"><div class="kicker">HALO</div><div class="title">Immersive live viewing · 2035</div><div class="meta"><span class="show-name">EXhOrizon dot</span> · live from KSPO DOME, Seoul · tonight, 20:00 KST</div></div><div class="status"><i class="dot"></i> relay online · +0.8 s</div><div class="stepper">${dots}</div>`;
@@ -7928,20 +8401,25 @@ function renderRide() {
   if (ride.step === 2) body = rideSheet(`<div class="sheet-seatmap"><div class="eyebrow">Step 2 · choose a seat</div><h2>Find your angle</h2><p>Pick any free seat in the 18-row rake. The preview lifts behind your row before settling into the seat.</p><div class="seat-filter" role="group" aria-label="Seat tiers"><button class="secondary on" data-tier="all">All seats</button>${RIDE_TIERS.map(t => `<button class="secondary" data-tier="${t.key}">${t.label}</button>`).join('')}</div><div id="ride-seat-map" class="ride-seat-map" aria-label="Full seat map"></div><div id="ride-seat-tip" class="fine">Faded seats are taken.</div><div class="preview-strip"><div class="mini-card"><strong>${seat?.label || 'Choose a free seat'}</strong><span>${tier.note}</span></div><div class="mini-card"><strong>${tier.label}</strong><span>${tier.include}</span></div></div><div class="actions"><button class="secondary" data-ride="back">Back</button><button class="secondary" data-ride="walk">Look around the cinema</button><button class="primary" data-ride="stick">Continue</button></div></div>`);
   if (ride.step === 3) body = rideSheet(`<div class="eyebrow">Step 3 · pair a lightstick</div><h2>Bring the glow</h2><p>Your stick follows the room cue. Pair your own for free, or borrow one at the door.</p><div class="option-grid"><button class="choice ${ride.paired ? 'on' : ''}" data-pair="own"><strong>Own stick · free</strong><span>Pair once, keep your colour.</span></button><button class="choice" data-pair="rent"><strong>HALO rental · $4</strong><span>Returned after the show.</span></button></div><div class="color-row">${RIDE_COLORS.map(c => `<button class="color-chip ${ride.color === c ? 'on' : ''}" style="--c:${c}" data-color="${c}" aria-label="Pair ${c}"></button>`).join('')}</div><div class="mini-card"><strong>${ride.paired ? 'Seat ' + (seat?.num || '214') + ' · stick paired' : 'Choose a colour to pair'}</strong><span>It will appear in your hand when the room opens.</span></div><div class="actions"><button class="secondary" data-ride="seat">Back</button><button class="primary" data-ride="consent" ${ride.paired ? '' : 'disabled'}>Continue</button></div>`);
   if (ride.step === 4) body = rideSheet(`<div class="eyebrow">Step 4 · consent and entry</div><h2>Set the boundary</h2><p>Granular controls for the relay. You can enter without a face scan.</p><div class="switch-list"><div class="switch">Lightstick activity<button class="toggle ${ride.consent.light ? 'on' : ''}" data-toggle="light"></button></div><div class="switch">Reactions during the show<button class="toggle ${ride.consent.reactions ? 'on' : ''}" data-toggle="reactions"></button></div><div class="switch">Pair entry to this seat<button class="toggle ${ride.consent.entry ? 'on' : ''}" data-toggle="entry"></button></div><div class="switch">Keep the receipt for 30 days<button class="toggle ${ride.consent.retain ? 'on' : ''}" data-toggle="retain"></button></div></div><div class="option-grid"><button class="choice ${ride.entry === 'express' ? 'on' : ''}" data-entry="express"><strong>Express</strong><span>Simulated face scan + pairing. No biometric API.</span></button><button class="choice ${ride.entry === 'standard' ? 'on' : ''}" data-entry="standard"><strong>Standard</strong><span>Printed QR, slower entry, no scan.</span></button></div><p class="fine">We keep seat, entry path, lightstick time and reactions for this prototype. No sale, no analytics, no account.</p><div class="actions"><button class="secondary" data-ride="stick">Back</button><button class="primary" data-ride="show">Enter HALO</button></div>`);
-  if (ride.step === 6 && ride.started) { const track = AUDIO_TRACKS[SHOW.cueIdx] || AUDIO_TRACKS[0]; body = `<div class="shot-label">${plan.director ? 'DIRECTOR CUT · ' : 'LIVE DOME FEED · '}${plan.chant}</div><div class="show-hud"><div class="eyebrow">HALO · local soundtrack</div><div class="song">${track.title}</div><div class="cue-line"><span>${rideFormatTime(Math.min(elapsed, 420))} / 07:00</span><span>${plan.effect}</span></div><div class="progress"><i style="width:${Math.min(100, elapsed / 420 * 100)}%"></i></div><div class="hud-actions"><button data-ride="next">Next song</button><button data-ride="full">${ride.full ? 'Back to my seat' : 'Full view'}</button><button data-ride="stepback">${cv.stepBack ? 'Return to seat' : 'Step back'}</button><button class="${ride.haptics ? 'on' : ''}" data-ride="haptics">Haptics</button><button data-ride="skip">Skip show</button></div></div>`; }
+  if (ride.step === 6 && ride.started) { const track = AUDIO_TRACKS[SHOW.cueIdx] || AUDIO_TRACKS[0]; body = `<div class="shot-label">${plan.director ? 'DIRECTOR CUT · ' : 'LIVE DOME FEED · '}${plan.chant}</div><div class="show-hud"><div class="eyebrow">HALO · local soundtrack</div><div class="song">${track.title}</div><div class="cue-line"><span>${rideFormatTime(Math.min(elapsed, 420))} / 07:00</span><span>${plan.effect}</span></div><div class="progress"><i style="width:${Math.min(100, elapsed / 420 * 100)}%"></i></div><div class="hud-actions"><button data-ride="next">Next song</button><button data-ride="full">${ride.full ? 'Back to my seat' : 'Full view'}</button><button data-ride="stepback">${cv.stepBack ? 'Return to seat' : 'Step back'}</button><button data-ride="walk">Walk around</button><button class="${ride.haptics ? 'on' : ''}" data-ride="haptics">Haptics</button><button data-ride="skip">Skip show</button></div></div>`; }
   if (ride.step === 7) body = rideSheet(`<div class="eyebrow">Step 7 · your receipt</div><h2>After the encore</h2><p>The room is dimming. Here is what HALO recorded for this visit.</p><div class="receipt"><div class="receipt-line"><span>Seat</span><span>${seat?.label || 'Row J · Seat 24'}</span></div><div class="receipt-line"><span>${tier.label} ticket</span><span>$${tier.price}</span></div><div class="receipt-line"><span>Entry path</span><span>${ride.entry === 'express' ? 'Express pairing' : 'Standard QR'}</span></div><div class="receipt-line"><span>Minutes watched</span><span>${Math.min(7, Math.max(0, Math.round(elapsed / 60)))} / 7</span></div><div class="receipt-line"><span>Lightstick time</span><span>${ride.paired ? '06:42' : '—'}</span></div><div class="receipt-line"><span>Stand-up ritual</span><span>available at your seat</span></div><div class="receipt-line"><span>Reaction peaks</span><span>3 · ${plan.title}</span></div></div><p class="fine">Share for a $2 discount next time, or keep this receipt local. The next price is shown before entry.</p><div class="actions"><button class="secondary" data-ride="end">Decline</button><button class="primary" data-ride="end">Share · $2 off</button></div>`);
   if (ride.step === 8) body = rideSheet(`<div class="eyebrow">HALO · thank you</div><h2>One picture. One night.</h2><p>Next stops: Busan · Taipei · Singapore. Your relay stays on this device unless you chose to keep the receipt.</p><div class="actions"><button class="primary" data-ride="again">Watch again</button></div><p class="fine">EXhOrizon dot is fan-made and unofficial. The stage picture is a live prototype, not a ticket to the concert.</p>`,'center');
+  const inShow = ride.step === 6 && ride.started; // walking during the show: the show clock keeps running; the bar shows the song and time (updated in place by updateShowHud)
+  if (walking) body = `<div class="sheet walk-bar"><div class="eyebrow">${inShow ? `Walk around · <span class="walk-clock">${(AUDIO_TRACKS[SHOW.cueIdx] || AUDIO_TRACKS[0]).title} · ${rideFormatTime(Math.min(elapsed, 420))} / 07:00</span>` : 'Look around the cinema'}</div><p class="fine">${isTouch ? 'Joystick to walk · tap Jump to hop onto the chairs · drag to look' : 'W A S D or the arrow keys to walk · Shift to run · Space to jump onto the chairs · drag to look · Esc to go back'}</p><div class="actions"><button class="secondary ${cv.person !== 'first' ? 'on' : ''}" data-person="third">Third person</button><button class="secondary ${cv.person === 'first' ? 'on' : ''}" data-person="first">First person</button><button class="primary" data-ride="walkback">${inShow ? 'Back to my seat' : 'Back to seats'}</button></div></div>`;
   root.innerHTML = chrome + body;
-  if (ride.step === 2) renderRideSeatMap();
+  if (ride.step === 2 && !walking) renderRideSeatMap();
 }
-function rideSetStep(step) { ride.step = step; ride.full = false; if (step !== 6) setCineView('seat'); renderRide(); }
+function rideLeaveWalk() { ride.walking = false; setCineView('seat'); renderRide(); }
+function rideSetStep(step) { ride.step = step; ride.full = false; ride.walking = false; if (step !== 6) setCineView('seat'); renderRide(); }
 $('#ride').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.seat) { const s = SEATS[+b.dataset.seat]; if (s) { ride.selected = s; pickHaloSeat(s); renderRide(); } return; }
+  if (e.detail > 0) b.blur(); // after a mouse / touch click focus must not stay on a button (Space / Enter would press it again while walking)
+  if (b.dataset.seat) { const s = SEATS[+b.dataset.seat]; if (s && !s.filled) { ride.selected = s; pickHaloSeat(s); renderRide(); } return; }
   if (b.dataset.color) { ridePairColor(b.dataset.color); return; }
   if (b.dataset.pair) { if (b.dataset.pair === 'own') ride.paired = true; renderRide(); return; }
   if (b.dataset.entry) { ride.entry = b.dataset.entry; renderRide(); return; }
   if (b.dataset.toggle) { ride.consent[b.dataset.toggle] = !ride.consent[b.dataset.toggle]; renderRide(); return; }
+  if (b.dataset.person) { setCinemaPerson(b.dataset.person); renderRide(); return; }
   const a = b.dataset.ride;
   if (a === 'seat') return rideSetStep(2);
   if (a === 'stick') return rideSetStep(3);
@@ -7950,7 +8428,8 @@ $('#ride').addEventListener('click', e => {
   if (a === 'show') return rideStartShow();
   if (a === 'next') return rideSkipCue();
   if (a === 'skip') return rideFinishShow();
-  if (a === 'walk') { ride.full = false; setCineView('seat'); toast('Use the seat view drag to look around the cinema.'); return; }
+  if (a === 'walk') { ride.full = false; cv.stepBack = false; ride.walking = true; setCineView('walk'); renderRide(); return; } // from Step 2 or from the show HUD (the show keeps playing)
+  if (a === 'walkback') return rideLeaveWalk();
   if (a === 'full') { ride.full = !ride.full; cv.stepBack = false; setCineView(ride.full ? 'tour' : 'seat'); renderRide(); return; }
   if (a === 'stepback') { ride.full = false; cv.stepBack = !cv.stepBack; setCineView('seat'); renderRide(); return; }
   if (a === 'haptics') { ride.haptics = !ride.haptics; vibOn = ride.haptics; if (ride.haptics) navigator.vibrate?.(28); renderRide(); return; }
@@ -7959,8 +8438,13 @@ $('#ride').addEventListener('click', e => {
 });
 /* Update the show HUD in place; rebuilding it every tick destroyed the buttons mid-click. */
 function updateShowHud() {
-  const root = $('#ride'), hud = root && root.querySelector('.show-hud'); if (!hud) { renderRide(); return; }
-  const elapsed = rideShowElapsed(), plan = SHOW_PLAN[SHOW.cueIdx] || SHOW_PLAN[0];
+  const root = $('#ride'), elapsed = rideShowElapsed();
+  if (ride.walking && cv.mode === 'walk') { // walking during the show: only the clock in the walk bar changes (rebuilding the bar every tick would eat clicks)
+    const clock = root && root.querySelector('.walk-clock'); if (!clock) { renderRide(); return; }
+    const txt = `${(AUDIO_TRACKS[SHOW.cueIdx] || AUDIO_TRACKS[0]).title} · ${rideFormatTime(Math.min(elapsed, 420))} / 07:00`; if (clock.textContent !== txt) clock.textContent = txt; return;
+  }
+  const hud = root && root.querySelector('.show-hud'); if (!hud) { renderRide(); return; }
+  const plan = SHOW_PLAN[SHOW.cueIdx] || SHOW_PLAN[0];
   const label = root.querySelector('.shot-label'), song = hud.querySelector('.song'), spans = hud.querySelectorAll('.cue-line span'), bar = hud.querySelector('.progress i');
   const lt = `${plan.director ? 'DIRECTOR CUT · ' : 'LIVE DOME FEED · '}${plan.chant}`;
   const track = AUDIO_TRACKS[SHOW.cueIdx] || AUDIO_TRACKS[0];
@@ -7972,7 +8456,6 @@ function updateShowHud() {
 }
 setInterval(() => { if (ride.started) { if (rideShowElapsed() >= SHOW_PLAN.length * RIDE_CUE_SECONDS) rideFinishShow(); else updateShowHud(); } }, 250);
 if (ride.step === 6) rideStartShow(); else { if (ride.step === 1) setCineView('tour'); renderRide(); }
-
 }
 </script>
 <script>
@@ -7988,10 +8471,10 @@ if (new URLSearchParams(location.search).has('nogl')) {
     const dots = labels.map((_, i) => `<i class="${i + 1 === step ? 'on' : ''}"></i>`).join('');
     let body = '';
     if (step === 1) body = `<div class="sheet center"><div class="eyebrow">HALO · immersive live viewing</div><h2>HALO</h2><p class="lede"><span class="show-name">EXhOrizon dot</span> is tonight's live programme: a live relay from the encore at KSPO DOME. The stage picture arrives on the dome; the room keeps the ritual.</p><div class="hero-stat"><div class="stat"><strong>2035</strong><small>HALO · Seoul</small></div><div class="stat"><strong>07:00</strong><small>mock concert</small></div><div class="stat"><strong>≤ 1,000</strong><small>local cinema</small></div></div><div class="actions"><button class="primary" data-nogl="seat">Choose a seat</button></div></div>`;
-    if (step === 2) body = `<div class="sheet"><div class="eyebrow">Step 2 · choose a seat</div><h2>Find your angle</h2><p>One steep rake, 18 rows, no balcony. Every seat reaches the whole screen.</p><div class="seat-map">${Object.entries(tierCopy).map(([n, price], i) => `<button class="seat-option ${i === 0 ? 'on' : ''}" style="--seat:${['#e8c28c','#75d0ff','#b9a6ff'][i]}">${n}<small>${price}</small></button>`).join('')}</div><div class="preview-strip"><div class="mini-card"><strong>Row J · Seat 24</strong><span>Screen wraps from the stage to the ceiling.</span></div><div class="mini-card"><strong>${SEATS.length} seats</strong><span>Every place is seated. Stand at your own seat.</span></div></div><div class="actions"><button class="secondary" data-nogl="back">Back</button><button class="primary" data-nogl="stick">Continue</button></div></div>`;
+    if (step === 2) body = `<div class="sheet"><div class="eyebrow">Step 2 · choose a seat</div><h2>Find your angle</h2><p>One steep rake, 18 rows, no balcony. Every seat reaches the whole screen.</p><div class="seat-map">${Object.entries(tierCopy).map(([n, price], i) => `<button class="seat-option ${i === 0 ? 'on' : ''}" style="--seat:${['#e8c28c','#75d0ff','#b9a6ff'][i]}">${n}<small>${price}</small></button>`).join('')}</div><div class="preview-strip"><div class="mini-card"><strong>Row J · Seat 24</strong><span>Screen wraps from the stage to the ceiling.</span></div><div class="mini-card"><strong>900 seats</strong><span>Every place is seated. Stand at your own seat.</span></div></div><div class="actions"><button class="secondary" data-nogl="back">Back</button><button class="primary" data-nogl="stick">Continue</button></div></div>`;
     if (step === 3) body = `<div class="sheet"><div class="eyebrow">Step 3 · pair a lightstick</div><h2>Bring the glow</h2><p>Your stick follows the room cue. Pair your own for free, or borrow one at the door.</p><div class="option-grid"><button class="choice on"><strong>Own stick · free</strong><span>Pair once, keep your colour.</span></button><button class="choice"><strong>HALO rental · $4</strong><span>Returned after the show.</span></button></div><div class="color-row"><button class="color-chip on" style="--c:#fff1d6"></button><button class="color-chip" style="--c:#4fd8ff"></button><button class="color-chip" style="--c:#a66bff"></button><button class="color-chip" style="--c:#ff4fb0"></button></div><div class="actions"><button class="secondary" data-nogl="seat">Back</button><button class="primary" data-nogl="consent">Continue</button></div></div>`;
     if (step === 4) body = `<div class="sheet"><div class="eyebrow">Step 4 · consent and entry</div><h2>Set the boundary</h2><p>Granular controls for the relay. You can enter without a face scan.</p><div class="switch-list"><div class="switch">Lightstick activity<button class="toggle on"></button></div><div class="switch">Reactions during the show<button class="toggle on"></button></div><div class="switch">Pair entry to this seat<button class="toggle on"></button></div><div class="switch">Keep the receipt for 30 days<button class="toggle"></button></div></div><div class="option-grid"><button class="choice on"><strong>Express</strong><span>Simulated pairing. No biometric API.</span></button><button class="choice"><strong>Standard</strong><span>Printed QR, no scan.</span></button></div><div class="actions"><button class="secondary" data-nogl="stick">Back</button><button class="primary" data-nogl="show">Enter HALO</button></div></div>`;
-    if (step === 6) body = `<div class="shot-label">LIVE DOME FEED · stage + roof rig</div><div class="show-hud"><div class="eyebrow">EXhOrizon dot · live relay</div><div class="song">Horizon</div><div class="cue-line"><span>0:42 / 07:00</span><span>Warm spill</span></div><div class="progress"><i style="width:10%"></i></div><div class="hud-actions"><button>Next song</button><button class="on">Full view</button><button class="on">Haptics</button><button>Skip show</button></div></div>`;
+    if (step === 6) body = `<div class="shot-label">LIVE DOME FEED · stage + roof rig</div><div class="show-hud"><div class="eyebrow">EXhOrizon dot · live relay</div><div class="song">Horizon</div><div class="cue-line"><span>0:42 / 07:00</span><span>Warm spill</span></div><div class="progress"><i style="width:10%"></i></div><div class="hud-actions"><button>Next song</button><button class="on">Full view</button><button>Step back</button><button>Walk around</button><button class="on">Haptics</button><button>Skip show</button></div></div>`;
     if (step === 7) body = `<div class="sheet"><div class="eyebrow">Step 7 · your receipt</div><h2>After the encore</h2><p>The room is dimming. Here is what HALO recorded for this visit.</p><div class="receipt"><div class="receipt-line"><span>Seat</span><span>Row J · Seat 24</span></div><div class="receipt-line"><span>Middle ticket</span><span>$18</span></div><div class="receipt-line"><span>Capacity</span><span>900 seated</span></div><div class="receipt-line"><span>Minutes watched</span><span>7 / 7</span></div><div class="receipt-line"><span>Lightstick time</span><span>06:42</span></div></div><div class="actions"><button class="secondary" data-nogl="end">Decline</button><button class="primary" data-nogl="end">Keep receipt</button></div></div>`;
     if (step === 8) body = `<div class="sheet center"><div class="eyebrow">HALO · thank you</div><h2>One picture. One night.</h2><p>Your relay stays on this device unless you chose to keep the receipt.</p><div class="actions"><button class="primary" data-nogl="again">Watch again</button></div></div>`;
     ride.hidden = false;
